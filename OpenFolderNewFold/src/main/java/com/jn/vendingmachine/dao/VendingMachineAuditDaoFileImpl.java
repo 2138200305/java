@@ -1,4 +1,4 @@
-package jn.dao;
+package com.jn.vendingmachine.dao;
 
 import java.io.FileWriter;
 import java.io.IOException;

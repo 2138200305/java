@@ -1,6 +1,6 @@
-package jn.ui;
+package com.jn.vendingmachine.ui;
 
-import jn.dto.VendingMachineItem;
+import com.jn.vendingmachine.dto.VendingMachineItem;
 
 import java.math.BigDecimal;
 import java.util.List;

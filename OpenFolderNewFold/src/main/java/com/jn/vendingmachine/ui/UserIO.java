@@ -1,4 +1,4 @@
-package jn.ui;
+package com.jn.vendingmachine.ui;
 import java.math.BigDecimal;
 
 public interface UserIO {

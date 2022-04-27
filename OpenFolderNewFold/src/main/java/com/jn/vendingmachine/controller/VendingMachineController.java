@@ -1,10 +1,11 @@
-package jn.controller;
+package com.jn.vendingmachine.controller;
 
-import jn.dao.VendingMachinePersistenceException;
-import jn.service.InsufficientFundsException;
-import jn.service.NoItemInventoryException;
-import jn.service.VendingMachineServiceLayer;
-import jn.ui.VendingMachineView;
+import com.jn.vendingmachine.dao.VendingMachinePersistenceException;
+import com.jn.vendingmachine.service.InsufficientFundsException;
+import com.jn.vendingmachine.service.NoItemInventoryException;
+import com.jn.vendingmachine.service.VendingMachineServiceLayer;
+import com.jn.vendingmachine.ui.VendingMachineView;
+import com.jn.vendingmachine.dao.VendingMachinePersistenceException;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

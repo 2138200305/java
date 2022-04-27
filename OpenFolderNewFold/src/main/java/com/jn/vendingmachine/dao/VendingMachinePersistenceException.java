@@ -1,4 +1,4 @@
-package jn.dao;
+package com.jn.vendingmachine.dao;
 
 public class VendingMachinePersistenceException extends  Exception {
 

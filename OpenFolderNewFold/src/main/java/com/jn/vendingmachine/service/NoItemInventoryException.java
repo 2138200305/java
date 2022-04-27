@@ -1,4 +1,4 @@
-package jn.service;
+package com.jn.vendingmachine.service;
 
 public class NoItemInventoryException extends Exception {
 

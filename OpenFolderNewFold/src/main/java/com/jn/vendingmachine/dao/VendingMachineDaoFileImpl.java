@@ -1,6 +1,6 @@
-package jn.dao;
+package com.jn.vendingmachine.dao;
 
-import jn.dto.VendingMachineItem;
+import com.jn.vendingmachine.dto.VendingMachineItem;
 
 import java.io.*;
 import java.math.BigDecimal;

@@ -1,8 +1,7 @@
-package jn.service;
+package com.jn.vendingmachine.service;
 
-import jn.dao.VendingMachinePersistenceException;
-import jn.dao.VendingMachinePersistenceException;
-import jn.dto.VendingMachineItem;
+import com.jn.vendingmachine.dao.VendingMachinePersistenceException;
+import com.jn.vendingmachine.dto.VendingMachineItem;
 
 import java.math.BigDecimal;
 import java.util.List;

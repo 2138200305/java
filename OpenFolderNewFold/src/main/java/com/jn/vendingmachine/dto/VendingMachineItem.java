@@ -1,4 +1,4 @@
-package jn.dto;
+package com.jn.vendingmachine.dto;
 
 import java.math.BigDecimal;
 

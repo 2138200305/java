@@ -1,10 +1,9 @@
-package jn.service;
+package com.jn.vendingmachine.service;
 
-import jn.dao.VendingMachineAuditDao;
-import jn.dao.VendingMachineDao;
-import jn.dao.VendingMachinePersistenceException;
-import jn.dto.VendingMachineItem;
-import jn.dao.VendingMachineDao;
+import com.jn.vendingmachine.dao.VendingMachineAuditDao;
+import com.jn.vendingmachine.dao.VendingMachineDao;
+import com.jn.vendingmachine.dao.VendingMachinePersistenceException;
+import com.jn.vendingmachine.dto.VendingMachineItem;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
