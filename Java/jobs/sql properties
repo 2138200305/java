@@ -1,0 +1,8 @@
+url=jdbc:oracle:thin:@bankaccountdb.csylxpgfy4vi.us-east-1.rds.amazonaws.com:1521:ORCL
+user=jaenwawe
+pass=classTime
+
+	String url=jdbc:oracle:thin:@bankaccountdb.csylxpgfy4vi.us-east-1.rds.amazonaws.com:1521:ORCL;
+	username =jaenwawe;
+	password =classTime;
+			

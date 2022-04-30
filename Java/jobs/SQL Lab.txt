@@ -1,0 +1,332 @@
+/*
+ * Runs under the CHINOOK schema
+ */
+/* 2.1 SELECT */
+SELECT *
+FROM employee;
+
+SELECT *
+FROM employee
+WHERE lastname = 'King';
+
+SELECT *
+FROM employee
+WHERE firstname = 'Andrew'
+AND reportsto IS NULL;
+
+/* 2.2 ORDER BY */
+SELECT *
+FROM album
+ORDER BY title DESC;
+
+SELECT firstname
+FROM customer
+ORDER BY city ASC;
+
+/* 2.3 INSERT INTO */
+INSERT INTO genre
+VALUES (26, 'Computer Generated');
+
+INSERT INTO genre
+VALUES (27, 'Other');
+
+INSERT INTO employee
+VALUES (9, 'Smith', 'John', 'Software Designer', 6, TO_DATE('25-01-1972', 'DD-MM-YYYY'), TO_DATE('15-12-2003', 'DD-MM-YYYY'), '1234 5 Place Dr', 'Lethbridge', 'AB', 'Canada', 'T1J 9D3', '+1 (403) 827-1027', '+1 (403) 827-2373', 'john@chinookcorp.com');
+
+INSERT INTO employee
+VALUES (10, 'James', 'Bob', 'Software Engineer', 6, TO_DATE('02-07-1974', 'DD-MM-YYYY'), TO_DATE('05-01-2004', 'DD-MM-YYYY'), '6789 10 Place Ave', 'Lethbridge', 'AB', 'Canada', 'T8O 2K6', '+1 (403) 286-2016', '+1 (403) 286-9547', 'bob@chinookcorp.com');
+
+/* 2.4 UPDATE */
+UPDATE customer
+SET
+firstname = 'Robert', lastname = 'Walter'
+WHERE firstname = 'Aaron'
+AND lastname = 'Mitchell';
+
+UPDATE artist
+SET
+name = 'CCR'
+WHERE name = 'Creedence Clearwater Revival';
+
+/* 2.5 LIKE */
+SELECT *
+FROM invoice
+WHERE billingaddress LIKE 'T%';
+
+/* 2.6 BETWEEN */
+SELECT *
+FROM Invoice
+WHERE total BETWEEN 15 AND 50;
+
+SELECT *
+FROM Employee
+WHERE hiredate BETWEEN TO_DATE('01/06/03', 'DD/MM/YY') AND TO_DATE('01/03/04', 'DD/MM/YY');
+
+/* 2.7 DELETE */
+DELETE
+FROM InvoiceLine
+WHERE invoiceId IN (SELECT invoiceId
+FROM Invoice
+WHERE invoiceId IN (SELECT customerId
+FROM Customer
+WHERE firstName = 'Robert'
+AND lastName = 'Walter'));
+
+DELETE
+FROM Invoice
+WHERE customerId IN (SELECT customerId
+FROM Customer
+WHERE firstName = 'Robert'
+AND lastName = 'Walter');
+
+DELETE
+FROM Customer
+WHERE firstName = 'Robert'
+AND lastName = 'Walter';
+
+/* 3.1 System Defined Functions */
+CREATE OR REPLACE FUNCTION get_curr_time RETURN VARCHAR IS the_time VARCHAR(8 CHAR);
+BEGIN RETURN TO_CHAR(CURRENT_DATE(), 'HH24:MI:SS');
+END;
+
+/
+
+CREATE OR REPLACE FUNCTION get_mediatype_len(id NUMBER) RETURN VARCHAR IS media_len NUMBER;
+BEGIN SELECT LENGTH(name) INTO media_len
+FROM MediaType
+WHERE mediaTypeId = id;
+
+RETURN media_len;
+END;
+
+/
+
+/* 3.2 System Defined Aggregate Functions */
+CREATE OR REPLACE FUNCTION invoice_avg RETURN NUMBER IS average NUMBER;
+BEGIN SELECT AVG(ALL total) INTO average
+FROM Invoice;
+
+RETURN average;
+END;
+
+/
+
+CREATE OR REPLACE FUNCTION get_expensive_track RETURN VARCHAR IS track_name VARCHAR(424);
+BEGIN SELECT NVL2(composer, name || ' by ' || composer, name) INTO track_name
+FROM Track
+WHERE milliseconds = (SELECT MAX(milliseconds)
+FROM Track);
+
+RETURN track_name;
+END;
+
+/
+
+/* 3.3 User Defined Scalar Functions */
+CREATE OR REPLACE FUNCTION invoiceline_avg(invId NUMBER) RETURN NUMBER IS average NUMBER;
+BEGIN SELECT AVG(ALL unitPrice) INTO average
+FROM InvoiceLine
+WHERE invoiceID = invId;
+
+RETURN average;
+END;
+
+/
+
+/* to test the above
+DECLARE answer NUMBER;
+BEGIN SELECT invoiceline_avg(193) INTO answer FROM DUAL;
+dbms_output.put_line('The answer is ' || answer);
+END;
+/
+*/
+/* 3.4 User Defined Table Valued Functions */
+/* Define the types needed */
+CREATE OR REPLACE TYPE t_gye_row AS OBJECT ( EMPLOYEEID NUMBER, LASTNAME VARCHAR2(20), FIRSTNAME VARCHAR2(20), TITLE VARCHAR2(30), REPORTSTO NUMBER, BIRTHDATE DATE, HIREDATE DATE, ADDRESS VARCHAR2(70), CITY VARCHAR2(40), STATE VARCHAR2(40), COUNTRY VARCHAR2(40), POSTALCODE VARCHAR2(10), PHONE VARCHAR2(24), FAX VARCHAR2(24), EMAIL VARCHAR2(60) );
+
+CREATE OR REPLACE TYPE t_gye_table IS TABLE OF t_gye_row;
+
+/* Defin the function */
+CREATE OR REPLACE FUNCTION get_younger_employees RETURN t_gye_table AS l_tab t_gye_table := t_gye_table();
+BEGIN FOR record IN (SELECT *
+FROM Employee e
+WHERE e.birthdate >= TO_DATE('01-01-1968', 'DD-MM-YYYY')) LOOP l_tab.extend;
+
+l_tab(l_tab.last) := t_gye_row(record.EMPLOYEEID, record.LASTNAME, record.FIRSTNAME, record.TITLE, record.REPORTSTO, record.BIRTHDATE, record.HIREDATE, record.ADDRESS, record.CITY, record.STATE, record.COUNTRY, record.POSTALCODE, record.PHONE, record.FAX, record.EMAIL);
+END LOOP;
+
+RETURN l_tab;
+END;
+
+/
+
+/* to test the above
+SELECT * FROM TABLE(get_younger_employees());
+*/
+/* 4.1 Basic Stored PROCEDURE */
+CREATE OR REPLACE PROCEDURE GET_CUST_NAMES (c_cursor OUT SYS_REFCURSOR) IS
+BEGIN OPEN c_cursor FOR SELECT firstName, lastName
+FROM Employee;
+END GET_CUST_NAMES;
+
+/
+
+/* to test the above
+DECLARE fName VARCHAR2(40);
+
+lName VARCHAR2(40);
+
+c SYS_REFCURSOR;
+BEGIN GET_CUST_NAMES(c_cursor => c);
+
+LOOP FETCH c INTO fName, lName;
+
+EXIT
+WHEN c % NOTFOUND;
+
+dbms_output.put_line('Name: ' || fName || ' ' || lName);
+END LOOP;
+END;
+/
+*/
+/* 4.2 Stored Procedure Input Parameters */
+CREATE OR REPLACE PROCEDURE UPDATE_TITLE (empId IN NUMBER, empTitle IN VARCHAR2) IS
+BEGIN UPDATE Employee
+SET
+title = empTitle
+WHERE employeeId = empId;
+END UPDATE_TITLE;
+
+/
+
+/* to test the above
+BEGIN UPDATE_TITLE(1, 'TEST TITLE');
+END;
+/
+*/
+CREATE OR REPLACE PROCEDURE GET_MANAGER (empId IN NUMBER, manager OUT VARCHAR2) IS
+BEGIN SELECT firstName || ' ' || lastName INTO manager
+FROM Employee
+WHERE employeeId = (SELECT reportsTo
+FROM Employee
+WHERE employeeId = empId);
+END GET_MANAGER;
+
+/
+
+/* to test the above
+DECLARE managerName VARCHAR2(30);
+BEGIN
+	GET_MANAGER(6, managerName);
+	dbms_output.put_line(managerName);
+END;
+/
+*/
+/* 4.3 Stored Procedure Output Parameters */
+CREATE OR REPLACE PROCEDURE GET_NAME_AND_COMPANY (in_cust_id IN NUMBER, out_f_name OUT VARCHAR2, out_l_name OUT VARCHAR2, out_comp_name OUT VARCHAR2) IS
+BEGIN SELECT a.firstname, a.lastname, a.company INTO out_f_name, out_l_name, out_comp_name
+FROM CUSTOMER a
+WHERE a.customerid = in_cust_id;
+END GET_NAME_AND_COMPANY;
+
+/
+
+/* to test the above
+DECLARE v_cust_id NUMBER := 10;
+
+v_f_name VARCHAR2(30);
+
+v_l_name VARCHAR2(30);
+
+v_c_name VARCHAR2(50);
+BEGIN GET_NAME_AND_COMPANY(v_cust_id, v_f_name, v_l_name, v_c_name);
+
+dbms_output.put_line(v_cust_id || ': ' || v_f_name || ' ' || v_l_name || ' at ' || v_c_name);
+END;
+/
+*/
+/* 5.0 Transactions */
+CREATE OR REPLACE PROCEDURE delete_invoice(in_invoiceid IN NUMBER) AS
+BEGIN
+	DELETE FROM InvoiceLine WHERE invoiceid = in_invoiceid;
+	DELETE FROM Invoice WHERE invoiceid = in_invoiceid;
+	COMMIT;
+END; /
+
+/* to test the above
+BEGIN
+	delete_invoice(216);
+END; /
+*/
+
+CREATE OR REPLACE PROCEDURE create_customer(in_customerid IN NUMBER, in_firstname IN VARCHAR2, in_lastname IN VARCHAR2, in_email IN VARCHAR2) AS
+BEGIN
+	INSERT INTO Customer (customerid, firstname, lastname, email) VALUES (in_customerid, in_firstname, in_lastname, in_email);
+	COMMIT;
+END; /
+
+/* to test the above
+BEGIN
+	create_customer(60, 'testfirstname', 'testlastname', 'testemail@test.com');
+END; /
+*/
+
+/* 6.1 AFTER/FOR */
+CREATE OR REPLACE TRIGGER trigger_insert_employee AFTER INSERT ON Employee
+BEGIN
+	dbms_output.put_line('trigger after employee insert');
+END; /
+
+/* to test the above
+BEGIN
+	INSERT INTO Employee (employeeid, firstname, lastname) VALUES (500, 'bob', 'smith');
+	ROLLBACK;
+END; /
+*/
+
+CREATE OR REPLACE TRIGGER trigger_update_album AFTER UPDATE ON Album
+BEGIN
+	dbms_output.put_line('trigger after album update');
+END; /
+
+/* to test the above
+BEGIN
+	UPDATE Album SET title = 'test title' WHERE albumid = 1;
+	ROLLBACK;
+END; /
+*/
+
+CREATE OR REPLACE TRIGGER trigger_delete_customer AFTER DELETE ON Customer
+BEGIN
+	dbms_output.put_line('trigger after customer delete');
+END; /
+
+/* to test the above
+BEGIN
+	DELETE FROM InvoiceLine WHERE invoiceid IN (SELECT invoiceid FROM Invoice WHERE customerid = 1);
+	DELETE FROM Invoice WHERE customerid = 1;
+	DELETE FROM Customer WHERE customerid = 1;
+	ROLLBACK;
+END; /
+*/
+
+/* 7.1 INNER */
+SELECT firstname, lastname, invoiceid FROM Customer INNER JOIN Invoice USING (customerid);
+
+/* 7.2 OUTER */
+SELECT customerid, firstname, lastname, invoiceid, total FROM Customer OUTER JOIN Invoice USING (customerid);
+
+/* 7.3 RIGHT */
+SELECT name, title FROM Artist RIGHT JOIN Album USING (artistid);
+
+/* 7.4 CROSS */
+SELECT * FROM Album CROSS JOIN Artist ORDER BY name ASC;
+
+/* 7.5 SELF */
+SELECT A.firstname, A.lastname, B.firstname, B.lastname FROM Employee A JOIN Employee B ON A.reportsto = B.employeeid;
+
+/* 9.0 Administration */
+/*
+ * TOOLS -> Database Export
+ * Dropp all the tables and run the script to restore
+*/

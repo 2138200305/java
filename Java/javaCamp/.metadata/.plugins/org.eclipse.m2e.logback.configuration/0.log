@@ -1,0 +1,28 @@
+2019-06-01 07:56:38,460 [Worker-1: Loading available Gradle versions] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2019-06-02 00:19:26,438 [Worker-4: Loading available Gradle versions] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is up-to-date. Trying to read.
+2019-06-02 00:20:44,394 [Worker-6: Creating project "User"] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.project:User:0.0.1-SNAPSHOT @ /Users/jaenwawe/GDrive/Doc/javaCamp/User/pom.xml.
+2019-06-02 00:20:44,728 [Worker-6: Creating project "User"] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /User/src/main/java
+2019-06-02 00:20:44,730 [Worker-6: Creating project "User"] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /User/src/main/resources
+2019-06-02 00:20:44,730 [Worker-6: Creating project "User"] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /User/src/test/java
+2019-06-02 00:20:44,730 [Worker-6: Creating project "User"] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /User/src/test/resources
+2019-06-02 00:20:45,719 [Worker-6: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-06-02 00:20:45,725 [Worker-6: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-06-02 00:20:45,727 [Worker-6: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-06-02 00:20:45,727 [Worker-6: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-06-02 00:21:24,638 [Worker-5: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-06-02 00:21:24,641 [Worker-5: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-06-02 00:21:24,643 [Worker-5: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-06-02 00:21:24,649 [Worker-5: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-06-02 00:21:25,669 [Worker-6: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-06-02 00:21:25,670 [Worker-6: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-06-02 00:21:25,671 [Worker-6: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-06-02 00:21:25,672 [Worker-6: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-06-02 00:21:56,434 [Worker-13: Launching User] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-06-02 00:21:56,436 [Worker-13: Launching User] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-06-02 00:21:56,437 [Worker-13: Launching User] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-06-02 00:21:56,438 [Worker-13: Launching User] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-06-02 00:22:19,075 [Worker-8: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-06-02 00:22:19,076 [Worker-8: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-06-02 00:22:19,077 [Worker-8: Building workspace] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (UTF-8 actually) to copy filtered resources, i.e. build is platform dependent!
+2019-06-02 00:22:19,077 [Worker-8: Building workspace] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2019-06-02 09:24:11,702 [Worker-5: Loading available Gradle versions] INFO  c.g.t.t.d.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.

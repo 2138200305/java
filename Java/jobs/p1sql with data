@@ -1,0 +1,118 @@
+
+DROP TABLE voucher_status;
+CREATE SEQUENCE voucher_status_seq START WITH 1;
+CREATE TABLE voucher_status
+(
+    voucher_status_id NUMBER DEFAULT voucher_status_seq.nextval NOT NULL,
+    status VARCHAR2(10) NOT NULL,
+    CONSTRAINT PK_voucher_status PRIMARY KEY  (voucher_status_id)
+    );
+ DESC voucher_status;   
+ Select * FROM voucher_status;
+
+INSERT INTO voucher_status (status) VALUES ('submitted');
+INSERT INTO voucher_status (status) VALUES ('approved');
+INSERT INTO voucher_status (status) VALUES ('denied');
+
+
+DROP TABLE voucher_type;
+CREATE SEQUENCE voucher_type_seq START WITH 1;
+ CREATE TABLE voucher_type
+(
+    voucher_type_id NUMBER DEFAULT voucher_type_seq.nextval NOT NULL,
+    voucher_type VARCHAR2(10) NOT NULL,
+    CONSTRAINT PK_voucher_type PRIMARY KEY  (voucher_type_id)
+    );
+     DESC voucher_type;   
+Select * FROM voucher_type;
+
+INSERT INTO voucher_type (voucher_type) VALUES ('lodging');
+INSERT INTO voucher_type (voucher_type) VALUES ('travel');
+INSERT INTO voucher_type (voucher_type) VALUES ('food');
+INSERT INTO voucher_type (voucher_type) VALUES ('other');
+
+DROP TABLE user_role;
+CREATE SEQUENCE role_seq START WITH 1;
+ CREATE TABLE user_role
+(
+    user_role_id   NUMBER DEFAULT role_seq.nextval NOT NULL,
+    user_role VARCHAR2(10) NOT NULL,
+    CONSTRAINT PK_user_role PRIMARY KEY  (user_role_id)
+    );    
+
+Select * FROM user_role;
+DESC user_role;
+
+DELETE FROM user_role WHERE user_role_id = 4 ;
+INSERT INTO user_role (user_role_id, user_role) VALUES (1, 'employee');
+INSERT INTO user_role (user_role_id, user_role) VALUES (2,'finance');
+
+
+DROP TABLE ers_user;
+CREATE SEQUENCE user_seq START WITH 1;
+CREATE TABLE ers_user
+(
+    user_id NUMBER DEFAULT user_seq.nextval NOT NULL,
+    user_name VARCHAR2(50) NOT NULL,
+    user_password VARCHAR2(50),
+    user_first_name VARCHAR2(100),
+    user_last_name VARCHAR2(100),
+    user_email VARCHAR2(150),
+    user_role_id NUMBER NOT NULL,
+    CONSTRAINT PK_user_id PRIMARY KEY  (user_id),
+    CONSTRAINT fk_user_role FOREIGN KEY (user_role_id)
+    REFERENCES user_role (user_role_id)    
+    );
+    
+    
+DELETE FROM ers_user WHERE user_role_id = 4 ;
+INSERT INTO ers_user (user_name, user_password, user_first_name, user_last_name, user_email, user_role_id) VALUES ('jaenwawe', 'passcode', 'Jae', 'Nwawe', 'nwawe.jae@gmail.com', 1);
+INSERT INTO ers_user (user_name, user_password, user_first_name, user_last_name, user_email, user_role_id) VALUES ('finance', 'password', 'Mr.', 'Manager', 'manager.two@gmail.com', 2);
+INSERT INTO ers_user (user_name, user_password, user_first_name, user_last_name, user_email, user_role_id) VALUES ('morton', 'salt', 'Roommate', 'Neighbor', 'tampa.fl@woho.com', 1);
+INSERT INTO ers_user (user_name, user_password, user_first_name, user_last_name, user_email, user_role_id) VALUES ('electric', 'smart', 'Newton', 'LastName', 'elec.last@gmail.com', 2);
+    
+Select * FROM ers_user;
+
+   
+DROP TABLE voucher;
+CREATE SEQUENCE voucher_seq START WITH 1;
+CREATE TABLE voucher
+(
+voucher_id NUMBER DEFAULT voucher_seq.nextval NOT NULL,
+voucher_amount NUMBER,
+    voucher_author NUMBER,
+    voucher_resolver NUMBER,
+    voucher_status_id NUMBER,
+    voucher_type_id NUMBER,
+    voucher_description VARCHAR2(250),
+        voucher_submitted TIMESTAMP,
+voucher_resolved TIMESTAMP,
+
+ CONSTRAINT PK_voucher PRIMARY KEY  (voucher_id),
+    CONSTRAINT FK_author_employee FOREIGN KEY (voucher_author)
+    REFERENCES ers_user (user_id),
+   
+    CONSTRAINT FK_resolver_employee FOREIGN KEY (voucher_resolver )
+    REFERENCES ers_user (user_id)
+    );
+    
+SELECT * FROM voucher;
+
+INSERT INTO voucher (voucher_amount, voucher_author , voucher_resolver, voucher_status_id, voucher_type_id,voucher_description, voucher_submitted, voucher_resolved ) VALUES ( 74, 1 , 2,  1, 1,'Enthunware', '10-SEP-02 02.10.10.123000000', '10-AUG-02 02.10.10.123000000');
+INSERT INTO voucher (voucher_amount, voucher_author , voucher_resolver,  voucher_status_id, voucher_type_id,voucher_description, voucher_submitted, voucher_resolved ) 
+VALUES ( 55, 3 ,3 ,  3, 3,'Subway', '10-JAN-00 02.10.10.123000000', '10-AUG-12 02.10.10.123000000');
+
+INSERT INTO voucher (voucher_amount, voucher_author , voucher_resolver, voucher_status_id, voucher_type_id,voucher_description, voucher_submitted, voucher_resolved ) VALUES ( 2, 3 , 1,  1, 2,'Oracle', '05-JUN-02 02.10.13.123000000', '17-JUL-02 03.10.10.123000000');
+INSERT INTO voucher (voucher_amount, voucher_author , voucher_resolver,  voucher_status_id, voucher_type_id,voucher_description, voucher_submitted, voucher_resolved )  VALUES ( 1500, 1 ,4,  1, 4,'Hilton', '07-JUL-09 02.11.10.123000000', '19-OCT-06 02.10.10.123000000');
+
+
+SELECT user_name, user_password, user_first_name, user_last_name, user_email, user_role_id
+FROM ers_user
+LEFT OUTER JOIN voucher
+ON ERS_USER.USER_ID = voucher_author;
+
+SELECT user_name, user_password, user_first_name, user_last_name, user_email, user_role_id, voucher_amount, voucher_resolver, voucher_status_id, voucher_type_id,voucher_description
+FROM ers_user
+FULL OUTER JOIN voucher
+ON ERS_USER.USER_ID = voucher_author;
+

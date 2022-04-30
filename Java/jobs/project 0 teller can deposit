@@ -1,0 +1,361 @@
+package com.project.zero;
+
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class User {
+	static HashMap<String, User> userMap = new HashMap();
+	static String clientUserName; // Employees can select User name to modify their account
+
+	String userName;
+	String userLevel;
+	String password;
+
+	Integer accountNo;
+	int counter = 100; // goal make it increment
+
+	// Account info
+	// String firstNLastName;
+	String[] firstNLastName = { "primaryAccountHolder", "secondaryAccountHolder" };
+
+	String accountHolderTwoName;
+	Double userBalance = 0.0;
+
+	Integer employeeID;
+	// AccountWTD accountServices = new AccountWTD();
+
+	static User currentUser = new User("almostApplicant", "registered", "guest");
+
+	static Scanner infoAccept = new Scanner(System.in);
+	String response;
+	static String userSelection = "w";
+
+	public static void mapToString(User currentUser) {
+		System.out.println("\t mapToString(User currentUser) shows userMap entered "
+				+ userMap.get(currentUser.userName).firstNLastName[0] + "\n" + "\t " + "userName: "
+				+ userMap.get(currentUser.userName).userName + " password: "
+				+ userMap.get(currentUser.userName).password + " " + "you are currently "
+				+ userMap.get(currentUser.userName).userLevel + " with account "
+				+ userMap.get(currentUser.userName).accountNo + " contains "
+				+ userMap.get(currentUser.userName).userBalance + "\n");
+	}
+
+	public User(String userName, String userLevel, String password) {
+		this.userName = userName;
+		this.userLevel = userLevel;
+		this.password = password;
+
+	}
+
+	public User(String userName, String userLevel, String password, Integer accountNo) {
+		this.userName = userName;
+		this.userLevel = userLevel;
+		this.password = password;
+
+		this.accountNo = accountNo;
+		this.firstNLastName[0] = "firstNLastName";
+		this.userBalance = 1.00;
+	}
+
+	public User(String userName, String userLevel, String password, Integer accountNo, Double accDouble) {
+		this.userName = userName;
+		this.userLevel = userLevel;
+		this.password = password;
+
+		this.accountNo = accountNo;
+		this.firstNLastName[0] = "firstNLastName";
+		this.userBalance = accDouble;
+	}
+
+	public User() {
+		this.userName = "welcomeUserName";
+		this.password = "welcomeUserPassword";
+
+		this.firstNLastName[0] = "Empty Constructor First User";
+		this.firstNLastName[1] = "Empty Constructor Second User";
+
+		this.userLevel = "registered";
+		this.accountNo = 4040;
+		this.userBalance = 4040.00;
+	}
+
+	public User userToCustomer(User applicantUser) {
+		System.out.println("What is your name");
+		applicantUser.firstNLastName[0] = infoAccept.nextLine();
+
+		applicantUser.accountNo = counter++;
+		applicantUser.userLevel = "customer";
+
+		System.out.println("Will you add a second account holder");
+		response = infoAccept.nextLine().toLowerCase().trim();
+		if (response.contains("yes")) {
+			System.out.println("What is their name");
+			applicantUser.firstNLastName[1] = infoAccept.nextLine();
+		}
+		return applicantUser;
+	}
+
+	public String customerMenu() {
+		String selection = "x";
+		System.out.println("\tYour username and password match a current customers");
+
+		System.out.println("Press:");
+		System.out.println("w - to withdraw");
+		System.out.println("d - to deposit");
+		System.out.println("t - to transfer");
+		System.out.println("x to Exit");
+		selection = infoAccept.nextLine().trim();
+		return selection;
+	}
+
+	public String employeeMenu() {
+		String selection = "x";
+		System.out.println("Press:");
+		System.out.println("w - to withdraw");
+		System.out.println("d - to deposit");
+		System.out.println("t - to transfer");
+		System.out.println("v - to view all customer information");
+		System.out.println("a - to deny or approve an account");
+		System.out.println("x to Exit");
+		selection = infoAccept.nextLine().trim();
+		return selection;
+	}
+
+	public String adminMenu() {
+		String selection = "x";
+		System.out.println("Press:");
+		System.out.println("w - to withdraw");
+		System.out.println("d - to deposit");
+		System.out.println("t - to transfer");
+		System.out.println("c - to cancel an account");
+		System.out.println("v - to view all customer information");
+		System.out.println("a - to deny or approve an account");
+		System.out.println("x to Exit");
+		selection = infoAccept.nextLine().trim();
+		return selection;
+	}
+
+	public Double deposit(Double balance, Double transactionAmount) {
+		balance = +transactionAmount;
+		return balance;
+	}
+
+	public Double withdraw(Double balance, Double transactionAmount) {
+		if (balance > transactionAmount)
+			balance = -transactionAmount;
+		else {
+			System.out.println(
+					"withdraw not completed because the transaction amount was greater than that available balance");
+		}
+		return balance;
+	}
+
+	public static void main(String[] args) {
+		User transactionUser;
+//		currentUser = welcomeScreen();
+//		mapToString(currentUser);
+
+		userMap.put(currentUser.userName, currentUser);
+		mapToString(currentUser);
+
+		currentUser = new User("regular", "customer", "password", 8393, 0.00);
+		currentUser.firstNLastName[0] = "regular First User";
+		currentUser.firstNLastName[1] = "regular Second User";
+		// currentUser.userLevel = "registered";
+		currentUser.accountNo = 4040;
+		currentUser.userBalance = 4040.00;
+
+		userMap.put(currentUser.userName, currentUser);
+		mapToString(currentUser);
+
+		currentUser = new User("teller", "employee", "code");
+		currentUser.firstNLastName[0] = "teller First User";
+		currentUser.firstNLastName[1] = "teller Second User";
+		// currentUser.userLevel = "registered";
+		currentUser.accountNo = 4040;
+		currentUser.userBalance = 4040.00;
+		userMap.put(currentUser.userName, currentUser);
+		mapToString(currentUser);
+
+		System.out.println("Main - Enter a username");
+		String welcomeUserName = infoAccept.nextLine().trim();
+
+		System.out.println("Main - Enter a password");
+		String welcomeUserPassword = infoAccept.nextLine().trim();
+
+		// (userMap.get(welcomeUserName)).password
+		// use user info in userMap if user logs in correctly from the welcome screen
+
+		if (userMap.containsKey(welcomeUserName)
+				& welcomeUserPassword.matches((userMap.get(welcomeUserName)).password)) {
+			currentUser = userMap.get(welcomeUserName);
+			if (userMap.get(welcomeUserName).userLevel == "customer") {
+				System.out.println("\t Username & Password confirmed");
+				mapToString(currentUser);
+				System.out.println("\tcustomer Menu selection is " + userSelection);
+				userSelection = currentUser.customerMenu();
+				currentUser = userMap.get(welcomeUserName);
+			} else if (userMap.get(currentUser.userName).userLevel == "employee") {
+				System.out.println("\tYour username and password match a current employees");
+				System.out.println("Welcome WinWin Bank employee \n" + currentUser.userName + " "
+						+ userMap.get(currentUser.userName).password);
+
+				mapToString(currentUser);
+				System.out.println("\temployee Menu selection is " + userSelection);
+				currentUser = userMap.get(currentUser.userName);
+				userSelection = currentUser.employeeMenu();
+			} else if (userMap.get(currentUser.userName).userLevel == "admin") {
+				mapToString(currentUser);
+				System.out.println("\tYour username and password match a current admin");
+				currentUser = userMap.get(currentUser.userName);
+				userSelection = currentUser.adminMenu();
+			} else {
+				System.out.println("Type apply to apply for a bank account");
+				if (infoAccept.nextLine().toLowerCase().contains("apply")) {
+					currentUser = currentUser.userToCustomer(currentUser);
+					userMap.put(currentUser.userName, currentUser);
+					System.out.println("Project 0 - Welcome to WinWin Bank \n" + currentUser.userName + " "
+							+ userMap.get(currentUser.userName).password);
+					userSelection = currentUser.customerMenu();
+					mapToString(currentUser);
+				}
+			}
+		}
+
+		String amount;
+		Double transaction;
+		Double transactionBalance;
+
+		switch (userSelection) {
+		case "d":
+			// Debugging
+			System.out.println("\t Selected d");
+			mapToString(currentUser);
+
+			System.out.println("\tcustomer Menu selection is " + userSelection);
+			if (userMap.get(currentUser.userName).userLevel.equals("admin")
+					|| userMap.get(currentUser.userName).userLevel.equals("employee")) {
+				mapToString(currentUser);
+				System.out.println("What user's account would you like? Enter userName");
+				clientUserName = infoAccept.nextLine().toLowerCase().trim();
+				// DEBUGGING
+				System.out.println("\t" + clientUserName + " clientUserName entered but not entering usermap ");
+
+				transactionUser = userMap.get(clientUserName);
+				transactionBalance = transactionUser.userBalance;// store client's balance in buffer
+
+				System.out.println("How much is the transaction?");
+				amount = infoAccept.nextLine().toLowerCase().trim();
+				transaction = Double.parseDouble(amount);
+				// Debugging
+				transactionBalance = transactionBalance
+						+ currentUser.deposit(userMap.get(clientUserName).userBalance, transaction);
+				System.out.println("\t transaction amount entered" + transaction);
+				mapToString(userMap.get(transactionUser.userName));
+				transactionUser.userBalance = transactionBalance;
+				userMap.put(clientUserName, transactionUser);
+				mapToString(userMap.get(clientUserName));
+			}
+			if (userMap.get(currentUser.userName).userLevel == "customer") {
+				mapToString(userMap.get(currentUser.userName));
+				transactionUser = userMap.get(currentUser.userName);
+				System.out.println("How much is the transaction?");
+				amount = infoAccept.nextLine().toLowerCase().trim();
+				transaction = Double.parseDouble(amount);
+				transactionBalance = +currentUser.deposit(userMap.get(currentUser.userName).userBalance, transaction);
+				System.out
+						.println("\t transaction amount entered" + transaction + userMap.get(transactionUser.userName));
+				transactionUser.userBalance = transactionBalance;
+				userMap.put(clientUserName, transactionUser);
+				mapToString(userMap.get(clientUserName));
+			}
+
+			break;
+		case "w":
+			// Debugging
+			System.out.println("\t Selected w");
+			mapToString(currentUser);
+			break;
+		case "t":
+			// Debugging
+			System.out.println("\t Selected t");
+			mapToString(currentUser);
+			break;
+		case "c":
+			// Debugging
+			System.out.println("\t Selected c");
+			mapToString(currentUser);
+			break;
+		case "v":
+			// Debugging
+			System.out.println("\t Selected v");
+			mapToString(currentUser);
+			break;
+		case "a":
+			// Debugging
+			System.out.println("\t Selected a");
+			mapToString(currentUser);
+			break;
+		case "x":
+			// Debugging
+			System.out.println("\t Selected x");
+			mapToString(currentUser);
+			break;
+
+		default:
+			System.out.println("Please restart the program.  Select a letter and hit enter.");
+			// code block
+		}
+	}
+}
+
+//if ((userMap.containsKey(currentUser.userName)
+//		& (currentUser.password == userMap.get(currentUser.userName).password))) {
+//	if (userMap.get(currentUser.userName).userLevel == "customer") {
+//		currentUser = userMap.get(currentUser.userName);
+//		userSelection = currentUser.customerMenu();
+
+// ((currentUser.password == userMap.get(currentUser.userName).password)
+
+// currentUser.userName = welcomeUserName;
+// currentUser.password = welcomeUserPassword;
+//	if ((userMap.containsKey(currentUser.userName))
+//		welcomeUser.password = "password"; // Testing if return customer can log in
+//		welcomeUser.userLevel = "employee";// Testing if return customer can log in
+
+// userMap.get(currentUser.userName)
+
+// DEBUGGING
+//System.out.println("Project 0 - Welcome to WinWin Bank" + currentUser.userName + " password:" + currentUser.password
+//		+ "\n" + "you are currently " + "registered");
+
+// userMap.put(currentUser.userName, currentUser);
+/*
+ * System.out.println("Enter a username"); currentUser.userName =
+ * infoAccept.nextLine().trim(); System.out.println("Enter a password");
+ * currentUser.password = infoAccept.nextLine().trim();
+ */
+
+//		// userSelection = currentUser.
+//		switch (currentUser.userLevel) {
+//		case "customer":
+
+//userMap.put("jae", new User("jae", "customer", "", 38383, 1000.00));
+// mapToString(userMap.get(clientUserName));
+//|| userMap.get(currentUser.userName).userLevel == "admin")
+
+//	public static User welcomeScreen() {
+//		String welcomeUserName;
+//		String welcomeUserPassword;
+//
+//		System.out.println("WelcomeScreen - Enter a username");
+//		welcomeUserName = infoAccept.nextLine().trim();
+//
+//		System.out.println("WelcomeScreen - Enter a password");
+//		welcomeUserPassword = infoAccept.nextLine().trim();
+//
+//		User welcomeUser = new User();
+//		mapToString(welcomeUser);
+//
+//		return welcomeUser;
+//	}

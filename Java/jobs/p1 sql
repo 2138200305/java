@@ -1,0 +1,69 @@
+DROP TABLE voucher_status;
+CREATE TABLE voucher_status
+(
+    voucher_status_id NUMBER NOT NULL,
+    status VARCHAR2(10) NOT NULL,
+    CONSTRAINT PK_voucher_status PRIMARY KEY  (voucher_status_id)
+    );
+    
+    Select * FROM voucher_status;
+   
+DROP TABLE voucher_type;
+
+ CREATE TABLE voucher_type
+(
+    voucher_type_id NUMBER NOT NULL,
+    voucher_type VARCHAR2(10) NOT NULL,
+    CONSTRAINT PK_voucher_type PRIMARY KEY  (voucher_type_id)
+    );
+
+Select * FROM voucher_type;
+DROP TABLE voucher_type;
+
+ CREATE TABLE user_role
+(
+    user_role_id NUMBER NOT NULL,
+    user_role VARCHAR2(10) NOT NULL,
+    CONSTRAINT PK_user_role PRIMARY KEY  (user_role_id)
+    );    
+Select * FROM user_role;
+
+DROP TABLE ers_user;
+CREATE TABLE ers_user
+(
+    user_id NUMBER NOT NULL,
+    user_name VARCHAR2(50) NOT NULL,
+    user_password VARCHAR2(50),
+    user_first_name VARCHAR2(100),
+    user_last_name VARCHAR2(100),
+    user_email VARCHAR2(150),
+    user_role_id NUMBER NOT NULL,
+    CONSTRAINT PK_user_id PRIMARY KEY  (user_id),
+    CONSTRAINT fk_user_role FOREIGN KEY (user_role_id)
+    REFERENCES user_role (user_role_id)
+    
+    );
+    
+Select * FROM ers_user;
+   
+DROP TABLE voucher;
+
+CREATE TABLE voucher
+(
+voucher_id NUMBER,
+voucher_amount NUMBER,
+voucher_submitted TIMESTAMP,
+voucher_resolved TIMESTAMP,
+    voucher_description VARCHAR2(250),
+    voucher_author NUMBER,
+    voucher_resolver NUMBER,
+    voucher_status_id NUMBER,
+    voucher_type_id NUMBER,
+
+ CONSTRAINT PK_voucher PRIMARY KEY  (voucher_id),
+    CONSTRAINT FK_author_employee FOREIGN KEY (voucher_author)
+    REFERENCES ers_user (user_id),
+   
+    CONSTRAINT FK_resolver_employee FOREIGN KEY (voucher_resolver )
+    REFERENCES ers_user (user_id)
+    );

@@ -1,0 +1,35 @@
+		if (userMap.containsKey(welcomeUserName))
+			if (welcomeUserPassword == (userMap.get(welcomeUserName)).password) {
+				currentUser=userMap.get(welcomeUserName);
+				if (userMap.get(welcomeUserName).userLevel == "customer") {
+
+					mapToString(currentUser);
+					System.out.println("\tcustomer Menu selection is " + userSelection);
+					userSelection = currentUser.customerMenu();
+					currentUser = userMap.get(welcomeUserName);
+				} else if (userMap.get(currentUser.userName).userLevel == "employee") {
+					System.out.println("\tYour username and password match a current employees");
+					System.out.println("Welcome WinWin Bank employee \n" + currentUser.userName + " "
+							+ userMap.get(currentUser.userName).password);
+
+					mapToString(currentUser);
+					System.out.println("\temployee Menu selection is " + userSelection);
+					currentUser = userMap.get(currentUser.userName);
+					userSelection = currentUser.employeeMenu();
+				} else if (userMap.get(currentUser.userName).userLevel == "admin") {
+					mapToString(currentUser);
+					System.out.println("\tYour username and password match a current admin");
+					currentUser = userMap.get(currentUser.userName);
+					userSelection = currentUser.adminMenu();
+				} else {
+					System.out.println("Type apply to apply for a bank account");
+					if (infoAccept.nextLine().toLowerCase().contains("apply")) {
+						currentUser = currentUser.userToCustomer(currentUser);
+						userMap.put(currentUser.userName, currentUser);
+						System.out.println("Project 0 - Welcome to WinWin Bank \n" + currentUser.userName + " "
+								+ userMap.get(currentUser.userName).password);
+						userSelection = currentUser.customerMenu();
+						mapToString(currentUser);
+					}
+				}
+			}

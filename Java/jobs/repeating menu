@@ -1,0 +1,23 @@
+
+    public static void main(String[] args) {
+        Boolean again = true;
+        Scanner input = new Scanner(System.in);
+        System.out.println("Press number one or two");
+        while (again) {
+            Integer intInput = input.nextInt();
+            switch (intInput) {
+            case 1:
+                System.out.println("Please enter one?");
+                //intInput = input.nextInt();
+                break;
+            case 2:
+                System.out.println("Please enter a number below 5?");
+                //intInput = input.nextInt();
+                again = false;
+                break;
+            default:
+                break;    
+            }
+        }
+        input.close();
+    }

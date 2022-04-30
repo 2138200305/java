@@ -1,0 +1,73 @@
+package src.com.BankAccount.util;
+
+
+import java.awt.List;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+public class MainDriver12 {
+	// Main Driver
+private static String url= "jdbc:oracle:thin:@bushmasta.cmehkcbrcjqj.us-east-2.rds.amazonaws.com:1521:orcl";
+private static String username= "Project1DB";
+private static String password= "p4ssword";
+
+//callable statement
+public static void callableStatementExample(String NAME1, String NAME2, String LOGIN, String PASSWORD1, double BALANCE,
+									int NUMBER)
+{
+	try(Connection conn =
+			DriverManager.getConnection(url, username, password))
+	{
+		String sql = "{ call insert_client_null_id(?,?,?,?,?,?) }";
+		
+		String sql2 = "{ TRUNCATE TABLE CLIENTDB; }";
+		CallableStatement cs2= conn.prepareCall(sql2);
+		
+		CallableStatement cs= conn.prepareCall(sql);
+		cs.setString(1, NAME1);
+		cs.setString(2, NAME2);
+		cs.setString(3,	LOGIN);
+		cs.setString(4, PASSWORD1);                
+		cs.setDouble(5, BALANCE);         
+		cs.setInt(6, NUMBER);    
+
+		
+		int status = cs.executeUpdate();
+		System.out.println("Callable statement returns: "+status);
+		
+	}catch(SQLException e) {
+		e.printStackTrace();
+		}
+	}
+
+public static ArrayList<Client> selectAllCleint() {
+	//creating an array to hold the records from
+	// the future query
+	ArrayList<Client> clientIn = new ArrayList<>();
+	
+	try(Connection conn=
+			DriverManager.getConnection(url,username, password))
+	{
+		//query everything in the Client db table table
+		String sql= "SELECT * FROM ClientDB";
+				
+		PreparedStatement ps= conn.prepareStatement(sql);
+		ResultSet rs= ps.executeQuery();
+
+		while(rs.next())
+		{
+			// Adding existing client to array to be added to map
+			clientIn.add(new Client(rs.getString("NAME1"), rs.getString("NAME2"), rs.getString("LOGIN"), rs.getString("PASSWORD"), rs.getDouble("BALANCE"), rs.getInt("Bank_AccountNum")));
+
+		}
+	}catch(SQLException e) {
+			e.printStackTrace();
+		}
+	return clientIn;
+	}
+}

@@ -1,0 +1,64 @@
+import { Component, OnInit } from '@angular/core';
+import { Hotel } from '../interfaces/hotel';
+import { GogoService } from '../services/gogo.service';
+
+@Component({
+  selector: 'app-listing',
+  templateUrl: './listing.component.html',
+  styleUrls: ['./listing.component.css']
+})
+export class ListingComponent implements OnInit {
+  private starSearch:number;
+  private hotel:Hotel;
+  private thatthing:string;
+  constructor(private gog:GogoService) { }
+
+  ngOnInit() {
+  }
+
+  hotelList:Hotel[]=
+  [
+    {
+      name:'Hilton',
+      stars:3.5,
+      location:'everywhere',
+      accessible:true
+    },
+    {
+      name:'marriot',
+      stars:2,
+      location:'clai',
+      accessible:true
+    },
+    {
+      name:'pink flamingo',
+      stars:5,
+      location:'mars',
+      accessible:false
+    }
+  ]
+  filteredList:Hotel[];
+
+  searchHotels(){
+    this.filteredList=[];
+    for(let hotel of this.hotelList){
+      if(hotel.stars>=this.starSearch){
+        this.filteredList.push(hotel);
+      }
+    }
+    console.log(this.filteredList)
+  }
+  //this is httpclient's observable for http requests
+  getemall(url){
+    this.gog.gadgetCats(url).subscribe((data:string) =>{
+      this.thatthing=data['message'];
+    })
+  }
+  //this is the promise version for http requests
+  getone(url){
+    this.gog.gadgetCats(url).toPromise().then(data =>{
+      console.log(data['message'])
+      this.thatthing=data['message']
+    })
+  }
+}

@@ -1,0 +1,27 @@
+Carl D Richardson Jr [1:26 PM]
+for(int i =0; i < pendAcct.size(); i++)
+        {
+            System.out.println("There are "+pendAcct.size()+" Accounts to apporve");
+            
+            
+            Client ClientAP = pendAcct.get(i);
+            System.out.println("Approval Pending: "+ClientAP);
+            
+            System.out.println("Approve Account? (Y/N)");
+            String answer1 = scan.nextLine();
+            
+            if(answer1.equals("Y")) {
+                System.out.println("Approved");
+                //scan.nextLine();
+                
+                BankEmMap.put(ClientAP.getLogin(),ClientAP);
+                pendAcct.remove(ClientAP);
+                System.out.println(BankEmMap);
+                System.out.println(pendAcct);
+            }
+            else if(answer1 == "N") {
+                System.out.println("Denied");
+                
+            }
+        }
+    }

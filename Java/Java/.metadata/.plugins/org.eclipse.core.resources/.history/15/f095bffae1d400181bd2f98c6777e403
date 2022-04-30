@@ -1,0 +1,66 @@
+/**
+ * 
+ */
+
+/**
+ * @author Jae
+ *
+ */
+import java.util.*;
+public class RockPaperScissors {
+
+
+	public enum Choice
+	{ 
+	    ROCK, PAPER, SCISSORS; 
+	} 
+	
+	
+	public Character userChoice() {
+		 @SuppressWarnings("null")
+		Character userChoice = null;
+		 Scanner input = new Scanner(System.in);
+		 System.out.print("Enter r for rock, p for paper, or s for scissors");
+		
+		 userChoice= Character.toLowerCase(input.next().charAt(0));
+		 
+			
+		return userChoice;
+	}
+	public static Choice computerChoice() {
+		Choice computerChoice;
+		
+		int choiceValue =  (int) ((int) 3 * Math.random());
+		
+		switch(choiceValue) {
+		case (0): computerChoice = Choice.ROCK; 
+		break;
+		
+		case (1): computerChoice = Choice.PAPER; 
+		 break;
+		
+		case (2): computerChoice = Choice.SCISSORS; 
+		break;
+		
+		default: computerChoice = Choice.ROCK; 
+		break;
+			
+		
+		}
+		return computerChoice; 
+		
+	};
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println(RockPaperScissors.computerChoice());
+		RockPaperScissors Game = new RockPaperScissors();
+		
+		System.out.println(Game.userChoice());
+
+	}
+
+}

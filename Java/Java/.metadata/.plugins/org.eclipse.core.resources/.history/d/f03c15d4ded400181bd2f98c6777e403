@@ -1,0 +1,43 @@
+/**
+ * 
+ */
+
+/**
+ * @author Jae
+ *
+ */
+public class RockPaperScissors {
+	
+	enum Choice
+	{ 
+	    ROCK, PAPER, SCISSORS; 
+	} 
+	
+	public static enum computerChoice() {
+		
+		double int choiceValue = (int) 3 * Math.random();
+		switch(choiceValue) {
+		case (0) Choice computerChoice = Choice.ROCK; 
+		return computerChoice; break;
+		
+		case (1) Choice computerChoice = Choice.PAPER; 
+		return computerChoice; break;
+		
+		case (2) Choice computerChoice = Choice.SCISSORS; 
+		return computerChoice; break;
+				
+		}
+		}
+		
+	};
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println(RockPaperScissors.computerChoice());
+
+	}
+
+}

@@ -1,0 +1,31 @@
+package com.project.controller;
+
+import javax.servlet.http.HttpServletRequest;
+
+public class LoginController {
+
+	public static String login(HttpServletRequest request) {
+		if(!request.getMethod().equals("POST")) {
+			return "resources/html/index.html";
+		}
+		
+		String username=request.getParameter("username");
+		String password=request.getParameter("password");
+		System.out.println(username+"  "+password);
+		if(!(username.equals("jae") && password.equals("nwawe"))) {
+			System.out.println("logged in LoginController");
+			System.out.println(" LoginController recieved HttpServletRequest"
+					+ "\n request returns unsuccessfullogin.html");
+
+			return "unsuccessfullogin.html";
+		}
+		else {
+			System.out.println(" LoginController recieved HttpServletRequest"
+					+ "\n request returns home.do");
+			
+			request.getSession().setAttribute("loggedusername", username);
+			request.getSession().setAttribute("loggedpassword", password);
+			return "home.do";
+		}
+	}
+}

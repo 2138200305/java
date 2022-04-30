@@ -1,0 +1,469 @@
+package com.project;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class User {
+
+
+	static Integer counter = 200;
+	User customerUser;
+
+	String userlogIn;
+	String userPasswordDB;
+	String firstNameDB;
+	String lastNameDB;
+	String userLevelDB;
+	Double userBalance;
+	Integer accountNo;
+
+	static Scanner infoAccept = new Scanner(System.in);
+	String response = "x";
+
+	static String userSelection = "x";
+
+	private final static String urlAWS = "jdbc:oracle:thin:@bankaccountdb.csylxpgfy4vi.us-east-1.rds.amazonaws.com:1521:orcl";
+	private final static String usernameAWS = "jaenwawe";
+	private final static String passwordAWS = "classTime";
+
+	public static HashMap<String, User>  readDB() throws SQLException {
+		HashMap<String, User> userMap = new HashMap<String, User>();
+		try (Connection conn = DriverManager.getConnection(urlAWS, usernameAWS, passwordAWS)) {
+			String sql = "SELECT * FROM bankuser";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+
+				User currentUser = new User(rs.getString("USER_NAME"), rs.getString("USER_PASSWORD"),
+						rs.getString("FIRST_NAME"), rs.getString("LAST_NAME"), rs.getInt("ACCOUNT_ID"),
+						rs.getDouble("BALANCE"));
+
+				currentUser.userLevelDB = rs.getString("USER_LEVEL");
+				if (!userMap.containsKey(currentUser.userlogIn)) userMap.put(currentUser.userlogIn,currentUser);
+				System.out.println(currentUser.userLevelDB+"  " +currentUser.userlogIn+"  "+currentUser.userPasswordDB+"  "+currentUser.userBalance);
+				
+			}
+		}
+		return userMap;
+	}
+
+	public static void updateBalance(String clientUserName, Double updatedBalance) {// todo change customer status
+		try (Connection conn = DriverManager.getConnection(urlAWS, usernameAWS, passwordAWS)) {
+
+			String sql = "UPDATE bankuser SET BALANCE = ? WHERE USER_NAME= ?";
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setDouble(1, updatedBalance);
+			ps.setString(2, clientUserName);
+			int howManyModified = ps.executeUpdate();
+			System.out.println(howManyModified + " rows were modified");
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void approveClientAccount() {// todo change customer status
+		System.out.println("What user's account would you like to approve? Enter userName");
+		String clientUserName = infoAccept.nextLine().toLowerCase().trim();
+
+		try (Connection conn = DriverManager.getConnection(urlAWS, usernameAWS, passwordAWS)) {
+
+			String sql = "UPDATE bankuser SET USER_LEVEL = 'customer' WHERE USER_NAME= ?";
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, clientUserName);
+
+			int howManyModified = ps.executeUpdate();
+			System.out.println("Rows modified " + howManyModified);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// THIS IS AN EXAMPLE of how to query using JDBC
+	public static HashMap<String, User> selectAllPendingUsers() {
+		HashMap<String, User> pendingUserMap = new HashMap<String, User>();
+		String sql = "SELECT * FROM bankuser WHERE USER_LEVEL='admin'";
+		try (Connection conn = DriverManager.getConnection(urlAWS, usernameAWS, passwordAWS)) {
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+
+				User currentUser = new User(rs.getString("USER_NAME"), rs.getString("USER_PASSWORD"),
+						rs.getString("FIRST_NAME"), rs.getString("LAST_NAME"), rs.getInt("ACCOUNT_ID"),
+						rs.getDouble("BALANCE"));
+				currentUser.userLevelDB = rs.getString("USER_LEVEL");
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return pendingUserMap;
+	}
+
+//callable statement
+	public static void callableStatementExample(String userNameDB, String userPassword, String firstName,
+			String lastName, String userLevel, Integer accountNo, Double userBalance) {
+		try (Connection conn = DriverManager.getConnection(urlAWS, usernameAWS, passwordAWS)) {
+			String sql = "{ call insert_BANKUSER_ID(?, ?, ?, ?, ?, ?, ?) }";
+
+			CallableStatement cs = conn.prepareCall(sql);
+			cs.setString(1, userNameDB);
+			cs.setString(2, userPassword);
+			cs.setString(3, firstName);
+			cs.setString(4, lastName);
+			cs.setString(5, userLevel);
+			cs.setInt(6, accountNo);
+			cs.setDouble(7, userBalance);
+
+			int status = cs.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// prepared statement
+	public static void preparedStatementExample(String userNameDB, String userPassword, String firstName,
+			String lastName, String userLevel, Integer accountNo, Double userBalance) {
+		try (Connection conn = DriverManager.getConnection(urlAWS, usernameAWS, passwordAWS)) {
+			// prepared statement guards against sql injection
+			// because it's pre-compiled (which also makes it faster)
+			String sql = "INSERT INTO bankuser(USER_NAME, USER_PASSWORD, FIRST_NAME, LAST_NAME, USER_LEVEL, ACCOUNT_ID, BALANCE)VALUES(?, ?, ?, ?, ?, ?, ?)";
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			ps.setString(1, userNameDB);
+			ps.setString(2, userPassword);
+			ps.setString(3, firstName);
+			ps.setString(4, lastName);
+			ps.setString(5, userLevel);
+			ps.setInt(6, accountNo);
+			ps.setDouble(7, userBalance);
+			ps.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void statementExample(String userNameDB, String userPasswordDB, String firstNameDB, String lastNameDB,
+			String userLevelDB, Integer accountNo, Double userBalance) {
+		try (Connection conn = DriverManager.getConnection(urlAWS, usernameAWS, passwordAWS)) {
+			// does NOT guard against sql injection
+			String sql = "INSERT INTO bankuser(userNameDB, String userPasswordDB, String firstNameDB,String lastNameDB, String userLevelDB, ACCOUNT_ID accountNo, String userLevelDB) "
+					+ "VALUES('" + userNameDB + "', '" + userPasswordDB + "', '" + firstNameDB + "', '" + lastNameDB
+					+ "', '" + userLevelDB + "', '" + accountNo + "', '" + userBalance + "' )";
+
+			Statement statement = conn.createStatement();
+
+			int numOfRowsChanged = statement.executeUpdate(sql);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public User(String dbUserName, String dbPassword, String dbFirstName, String dbLastName, Integer dbAccountNo,
+			Double dbAccountBalance) {
+		this.userlogIn = dbUserName;
+		this.userPasswordDB = dbPassword;
+		this.firstNameDB = dbFirstName;
+		this.lastNameDB = dbLastName;
+		this.accountNo = dbAccountNo;
+		this.userBalance = dbAccountBalance;
+	}
+
+	public static String customerMenu() {
+		String selection = "x";
+		System.out.println("\tYour username and password match a current customers");
+
+		System.out.println("Press:");
+		System.out.println("w - to withdraw");
+		System.out.println("d - to deposit");
+		System.out.println("t - to transfer");
+		System.out.println("x to Exit");
+		selection = infoAccept.nextLine().trim();
+		return selection;
+	}
+
+	public static String employeeMenu() {
+		String selection = "x";
+		System.out.println("Press:");
+		System.out.println("w - to withdraw");
+		System.out.println("d - to deposit");
+		System.out.println("t - to transfer");
+		System.out.println("v - to view all customer information");
+		System.out.println("a - to deny or approve an account");
+		System.out.println("x to Exit");
+		selection = infoAccept.nextLine().trim();
+		return selection;
+	}
+
+	public static String adminMenu() {
+		String selection = "x";
+		System.out.println("Press:");
+		System.out.println("w - to withdraw");
+		System.out.println("d - to deposit");
+		System.out.println("t - to transfer");
+		System.out.println("c - to cancel an account");
+		System.out.println("v - to view all customer information");
+		System.out.println("a - to deny or approve an account");
+		System.out.println("x to Exit");
+		selection = infoAccept.nextLine().trim();
+		return selection;
+	}
+
+	public Double deposit(Double balance, Double transactionAmount) {
+		balance = +transactionAmount;
+		return balance;
+	}
+
+	//transactionUser.userBalance, transaction
+	public Double withdraw(Double balance, Double transactionAmount) {
+		System.out.println("Balance will be" +balance+ " - "+ transactionAmount+ "or it will say withdraw not completed because the transaction amount was greater than that available balance");
+		Double updatedBalance;
+		
+		if (balance < transactionAmount) { 
+			updatedBalance = balance;
+			System.out.println("withdraw not completed because the transaction amount was greater than that available balance");
+		}
+		else {
+			updatedBalance =   balance - transactionAmount;	
+				}
+		return updatedBalance;
+	}
+
+	public static void transferToFrom(User fromClient) throws SQLException {
+		HashMap<String,User> updatedMap = readDB();
+
+		User transactionUser = updatedMap.get(fromClient.userlogIn);
+		System.out.println("How much is the transaction?");
+		String amount = infoAccept.nextLine().toLowerCase().trim();
+		Double transaction = Double.parseDouble(amount);
+
+		// withdraw from From Customer
+		System.out.println("\t withdraw amount entered" + transaction);
+		transactionUser.userBalance = transactionUser.withdraw(transactionUser.userBalance, transaction);
+
+		updateBalance(transactionUser.userlogIn, transactionUser.userBalance);
+		
+		// deposit to To Customer
+		System.out.println("What user's account would you like to transfer to? Enter userName");
+		String toClientUserID = infoAccept.nextLine().toLowerCase().trim();
+		User toClient = updatedMap.get(toClientUserID);
+		transactionUser = toClient;
+		transactionUser.userBalance = transactionUser.deposit(transactionUser.userBalance, transaction);
+		updateBalance(transactionUser.userlogIn, transactionUser.userBalance);
+		System.out.println("\t transaction amount entered" + transaction);
+
+	}
+
+	public static void applyForAccount(String logInUserName, String logInPassword) {
+
+		String selectionApply = "x";
+
+		System.out.println("Type apply to open a bank account");
+		selectionApply = infoAccept.nextLine().trim();
+		System.out.println("Customer typed " + selectionApply + "for selectionApply");
+
+		if (selectionApply.equalsIgnoreCase("apply")) {
+			System.out.println("inside if and creating registered user bc Customer typed " + selectionApply
+					+ "for selectionApply");
+
+			System.out.println("What is your first name");
+			String firstName = infoAccept.nextLine().trim();
+
+			System.out.println("What is your last name");
+			String lastName = infoAccept.nextLine().trim();
+
+			preparedStatementExample(logInUserName, logInPassword, firstName, lastName, "customer", counter++, 0.0);
+
+		}
+	}
+
+	public static User getClientAccount() throws SQLException {
+		HashMap<String,User> updatedMap = readDB();
+		System.out.println("What user's account would you like? Enter userName");
+		String clientUserName = infoAccept.nextLine().toLowerCase().trim();
+		return updatedMap.get(clientUserName);
+	}
+
+	public void menuOptions(String userSelection, User currentUser) throws SQLException {// TODO
+		HashMap<String,User> updatedMap = readDB();
+		String amount;
+		Double transaction;
+		Double transactionBalance = 0.00;
+		User transactionUser;
+
+		switch (userSelection) {
+		case "d":
+			if (currentUser.userLevelDB.equals("admin") || currentUser.userLevelDB.equals("employee")) {
+				transactionUser = getClientAccount();
+			} else {
+				transactionUser = currentUser;
+			}
+			transactionBalance = transactionUser.userBalance;// store client's balance in buffer			
+			
+			System.out.println("How much is the transaction?");
+			amount = infoAccept.nextLine().toLowerCase().trim();
+			transaction = Double.parseDouble(amount);
+			transactionUser.userBalance = transactionBalance + transactionUser.deposit(transactionUser.userBalance, transaction);
+			System.out.println(" In deposit the  updated userBalance= " +transactionUser.userBalance);
+			
+			
+			updatedMap.replace(transactionUser.userlogIn, transactionUser);
+			System.out.println(transactionUser.userlogIn + "customer login");
+			updateBalance(transactionUser.userlogIn, transactionUser.userBalance);
+			
+			break;
+
+		case "w":
+			if (currentUser.userLevelDB.equals("admin") || currentUser.userLevelDB.equals("employee")) {
+				transactionUser = getClientAccount();
+			} else {
+				transactionUser = currentUser;
+			}
+
+			
+			System.out.println("transactionUser.userBalance" + transactionUser.userBalance);
+		
+			System.out.println("How much is the transaction?");
+			amount = infoAccept.nextLine().toLowerCase().trim();
+			transaction = Double.parseDouble(amount);
+			
+			System.out.println("Tr"+ transactionUser.userBalance);
+			System.out.println("transaction parses that to "+ transaction);
+
+			System.out.println("amount entered is "+ amount);
+			transactionBalance = transactionUser.withdraw(transactionUser.userBalance, transaction);
+					
+			System.out.println(" In withdraw the  updated userBalance= " +transactionBalance);
+			updatedMap.replace(transactionUser.userlogIn, transactionUser);
+			updateBalance(transactionUser.userlogIn, transactionBalance);
+			System.out.println(" In withdraw the updated userBalance = " +transactionBalance);
+			// mapToString(transactionUser);
+			break;
+
+		case "t":
+
+			User fromClient;
+
+			if (currentUser.userLevelDB.equals("admin") || currentUser.userLevelDB.equals("employee")) {
+				fromClient = getClientAccount();
+
+			} else {
+				fromClient = currentUser;
+			}
+			transferToFrom(fromClient);
+			
+			break;
+
+		case "c":
+			System.out.println("\tDebugging You made it to case c");
+
+			System.out.println("\t Selected c");
+			if (currentUser.userLevelDB.equals("admin"))
+
+			{
+				transactionUser = getClientAccount();
+			} else {
+				transactionUser = currentUser;
+			}
+			transactionUser = updatedMap.get(transactionUser.userlogIn);
+			transactionUser.userLevelDB = "cancelled";
+			transactionUser.accountNo = 0000;
+			transactionUser.userBalance = 000.00;
+			transactionBalance = transactionUser.userBalance;// store
+
+
+			// mapToString(userMap.get(transactionUser.userlogIn));
+			break;
+		case "v":
+			System.out.println("\tDebugging You made it to case v");
+			if (updatedMap.get(currentUser.userlogIn).userLevelDB.equals("admin")) {
+				for (String mapUserRecord : updatedMap.keySet()) {
+				}
+			} else
+				System.exit(0);
+			break;
+		case "a":
+			// Debugging
+			// TODO
+			System.out.println("\t Selected a");
+			selectAllPendingUsers();
+			approveClientAccount();
+			break;
+		case "x":
+			System.exit(0);
+			System.out.println("DebbugginBreak point inside case x");
+			break;
+
+		default:
+			System.exit(0);
+
+		}
+
+	}
+
+	public static String getMenu(String userLevel) {
+		switch (userLevel) {
+		case "customer":
+			userSelection = customerMenu();
+
+			break;
+		case "employee":
+
+			userSelection = employeeMenu();
+			break;
+		case "admin":
+			userSelection = adminMenu();
+			break;
+		default:
+		}
+		return userSelection;
+	}
+
+	public static void main(String[] args) throws SQLException {
+		String welcomeUserPassword;
+		String welcomeUserName;
+		Boolean again = true;
+
+
+
+		System.out.println("Main - Enter a username");
+		welcomeUserName = infoAccept.nextLine().trim();
+
+		System.out.println("Main - Please enter a password");
+		welcomeUserPassword = infoAccept.nextLine().trim();
+		HashMap<String, User> userMap = readDB();
+		if (!userMap.containsKey(welcomeUserName))
+			applyForAccount(welcomeUserName, welcomeUserPassword);
+		else {
+			do {
+				if (userMap.containsKey(welcomeUserName)
+						& welcomeUserPassword.matches((userMap.get(welcomeUserName)).userPasswordDB)) {
+					User currentWelcomeUser = userMap.get(welcomeUserName);
+
+					userSelection = getMenu(currentWelcomeUser.userLevelDB);
+					if (userSelection.equals("x")) {
+						again = false;
+						System.out.println("Exiting the software");
+					}
+					currentWelcomeUser.menuOptions(userSelection, currentWelcomeUser);
+				}
+
+			} while (again);
+		}
+
+		System.out.println("done");
+	}
+}

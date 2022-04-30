@@ -1,0 +1,112 @@
+/**
+ * 
+ */
+
+/**
+ * @author Jae
+ *
+ */
+import java.util.*;
+public class chRockPaperScissors {
+	private static int computerWin = 0;
+	private static int userWin = 0;
+	private static Character computerChoice;
+	public static chRockPaperScissors Game = new chRockPaperScissors();
+	static boolean keepPlaying = true;
+	
+
+
+	public boolean playAgain() {
+		Scanner input2 = new Scanner(System.in);
+		
+		 Character rePlay = ' ';
+		 System.out.print("Enter y if you would like to play again");
+		 if (input2.hasNextLine()) 
+			 rePlay = input2.nextLine().charAt(0);
+			 System.out.print("Enter y if you would like to play again and n if you would like to stop");
+			 
+			
+		 
+		 if (rePlay == 'y') {
+			 
+			 return true;
+		 }   return false;
+		 
+	}
+
+		 	
+	
+	
+	public Character userChoice() {
+		
+		Character userChoice = 'r';
+		 Scanner input = new Scanner(System.in);
+		 System.out.print("Enter r for rock, p for paper, or s for scissors");
+		
+		 userChoice=input.nextLine().charAt(0);
+		 input.close();
+		 
+			
+		return userChoice;
+	}
+	public static Character computerChoice() {
+		
+		
+		int choiceValue =  (int) ((int) 3 * Math.random());
+		
+		switch(choiceValue) {
+		case (0): computerChoice = 'r'; 
+		break;
+		
+		case (1): computerChoice = 'p'; 
+		 break;
+		
+		case (2): computerChoice = 's'; 
+		break;
+		
+		default: computerChoice = 'r'; 
+		break;
+			
+		
+		}
+		return computerChoice; 
+		
+	};
+	
+	public static void determineWinner(Character userChose, Character computerChose) {
+		
+		if ((computerChose == 'r' && userChose == 'r')|| (computerChose == 'p' && userChose == 'p')|| (computerChose == 's' && userChose == 'p'))
+			System.out.println("There is a tie since the computer and user both choose" + computerChose);
+		
+		if((computerChose == 'r' && userChose == 's')|| (computerChose == 'p' && userChose == 'r')|| (computerChose == 's' && userChose == 'p')) {
+			 computerWin++;
+			System.out.println("The computer chose " + computerChose+" which beats "+userChose);
+		}
+		
+		if((computerChose == 'r' && userChose == 'p')|| (computerChose == 'p' && userChose == 's')|| (computerChose == 's' && userChose == 'p')) {
+			userWin++;
+			System.out.println("The user chose " + userChose+" which beats "+computerChose);
+		}
+	
+		
+	}
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		
+		while(keepPlaying) {
+		System.out.println(chRockPaperScissors.computerChoice());
+		Character userChose = Game.userChoice();
+		Character computerChose = computerChoice();
+		chRockPaperScissors.determineWinner(userChose, computerChose);
+		keepPlaying = Game.playAgain();
+		} 
+		
+	
+
+}
+}

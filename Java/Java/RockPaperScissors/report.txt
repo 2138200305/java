@@ -1,0 +1,7 @@
+RockPaperScissors is a java program that uses Math.random to generate three integers.
+
+Then the computer's choice for rock, paper, scissors depends on the Math.random amount multiplied by 3 which leads to the integer 0,1, or 2.
+The user will select r, p, or s.  
+The computer's choice and user's choice are compared using if statements.
+The the user and computer have a score that is incremented by one if they win that game.
+The user came replay by typing y.

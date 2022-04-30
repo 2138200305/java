@@ -1,0 +1,38 @@
+CREATE TABLE bankuser_junction(
+   account_id NUMBER NOT NULL,
+    bankuser_id NUMBER NOT NULL,
+    CONSTRAINT my_combo_key PRIMARY KEY
+        (account_id, bankuser_id),
+    FOREIGN KEY (my_bankuser_id) REFERENCES ACCOUNTS (bankuser_id),
+    FOREIGN KEY (my_account_id) REFERENCES  BANK_USERS (account_id)
+);
+
+
+CREATE TABLE bankuser_junction(
+   account_id NUMBER NOT NULL,
+    bankuser_id NUMBER NOT NULL,
+    CONSTRAINT my_combo_key PRIMARY KEY
+        (account_id, bankuser_id),
+    FOREIGN KEY (account_id) REFERENCES superhumans (bankuser_id),
+    FOREIGN KEY (bankuser_id) REFERENCES bankuser (account_id)
+);
+
+  ACCOUNT_ID NOT NULL NUMBER(15) 
+//        BALANCE             NUMBER(30)     
+
+
+//        USER_NAME     NOT NULL VARCHAR2(26) 1
+//        USER_PASSWORD          VARCHAR2(26) 2
+//        FIRST_NAME             VARCHAR2(25) 3
+//        LAST_NAME              VARCHAR2(25) 4
+//        USER_LEVEL             VARCHAR2(25) 5
+           ---------- -------- ---------- 
+//        ACCOUNT_ID NOT NULL NUMBER(15) 
+//        BALANCE             NUMBER(30)       
+
+
+    	ps.setString(1, user_name);
+	//	ps.setString(2, user_password);
+	//	ps.setString(3, first_name);
+	//	ps.setString(4, last_name);
+	//	ps.setString(5, user_name);

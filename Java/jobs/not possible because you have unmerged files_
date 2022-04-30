@@ -1,0 +1,122 @@
+[33mcommit fe37bc5f82ebd1eb93613959ad898723f1ac2983[m[33m ([m[1;36mHEAD -> [m[1;32mJae_Nwawe[m[33m)[m
+Author: jaenwawe <nwawe.jae@gmail.com>
+Date:   Thu May 16 14:39:05 2019 -0400
+
+    q1 - q7
+
+[33mcommit e9cbe6d581ef6a35063dc95e33972b5b02dcc5f6[m
+Merge: 4522317 4342528
+Author: jaenwawe <nwawe.jae@gmail.com>
+Date:   Thu May 16 09:22:23 2019 -0400
+
+    wed changes
+
+[33mcommit 4522317359e032d92abc41ed66dcde080529944c[m
+Author: jaenwawe <nwawe.jae@gmail.com>
+Date:   Thu May 16 09:20:43 2019 -0400
+
+    wed work
+
+[33mcommit 316d5ce3c40e8020fcd761b6f7cfaf07654f82a8[m
+Author: jaenwawe <nwawe.jae@gmail.com>
+Date:   Wed May 15 22:21:10 2019 -0400
+
+    Homework up to 6
+
+[33mcommit 4342528af8674f1b9fa05c099dfa71d6a9ce10fa[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Author: TChester <Trevin.Chester@gmail.com>
+Date:   Wed May 15 17:10:52 2019 -0400
+
+    day 3 materials
+
+[33mcommit b44f8da700634fdb83c3b8786fc0feb4e523467d[m
+Author: TChester <Trevin.Chester@gmail.com>
+Date:   Wed May 15 09:26:11 2019 -0400
+
+    added the dot project file
+
+[33mcommit 0ee1e60dac86eaad1a111754cb3e596dde4c4816[m
+Author: TChester <Trevin.Chester@gmail.com>
+Date:   Wed May 15 09:23:09 2019 -0400
+
+    new git ignores
+
+[33mcommit e589af7ad262d0b1bf935b452782e961e1deac00[m
+Author: jaenwawe <nwawe.jae@gmail.com>
+Date:   Tue May 14 22:54:48 2019 -0400
+
+    LF will be replaced by CRLF in Jae_Nwawe_Code/.gitignore
+
+[33mcommit 97e1ab814afa928cefba214f5f1992b4874d1b2b[m
+Merge: ed2fdb7 0f7add1
+Author: jaenwawe <nwawe.jae@gmail.com>
+Date:   Tue May 14 20:37:13 2019 -0400
+
+    Merge branch 'master' into Jae_Nwawe
+
+[33mcommit ed2fdb796c5bee834cd9ea1a8358dc4ed2456337[m
+Author: jaenwawe <nwawe.jae@gmail.com>
+Date:   Tue May 14 20:27:09 2019 -0400
+
+    moved files outside of Google Drive
+
+[33mcommit 0f7add1b162168568b2768638d2613875cca9c24[m
+Author: TChester <Trevin.Chester@gmail.com>
+Date:   Tue May 14 16:39:15 2019 -0400
+
+    day 2 materials
+
+[33mcommit 16a0e66da22e05b4502b6dfafce7a81bf18c03c2[m
+Author: TChester <Trevin.Chester@gmail.com>
+Date:   Tue May 14 12:04:51 2019 -0400
+
+    new java project from day 2
+
+[33mcommit a7225f0d9fb530c66d79b193d097cded32b0e684[m
+Merge: 9b485c7 555291d
+Author: jaenwawe <nwawe.jae@gmail.com>
+Date:   Tue May 14 10:53:09 2019 -0400
+
+    fix merge conflict
+
+[33mcommit 555291d001f60b2363b979e9f43a7a6a0ef7de11[m
+Author: TChester <Trevin.Chester@gmail.com>
+Date:   Tue May 14 10:35:54 2019 -0400
+
+    adding the git ignore AND first java helloworld
+
+[33mcommit 9b485c7a73ab0b2d63af9055578718a22cada341[m
+Author: jaenwawe <nwawe.jae@gmail.com>
+Date:   Mon May 13 20:56:50 2019 -0400
+
+    empty txt file
+
+[33mcommit 63f1b8ecb0f2eab55f81b7a03fa0c51706a7a86b[m
+Author: jaenwawe <nwawe.jae@gmail.com>
+Date:   Mon May 13 20:46:07 2019 -0400
+
+    Initial commit with empty README.md
+
+[33mcommit fbcb90cb14d8d95dccedefff5d5c5926b79fb08a[m
+Author: Jae N <nwawe.jae@gmail.com>
+Date:   Mon May 13 16:32:40 2019 -0400
+
+    add
+
+[33mcommit 746f4c47c5a302ff4f73024690081b297d4774d4[m
+Author: TChester <Trevin.Chester@gmail.com>
+Date:   Mon May 13 16:23:57 2019 -0400
+
+    first changes to our git repos
+
+[33mcommit 901d0473cb13f9c9d049cda009f715c40bb398d7[m
+Author: T Chester <trevin.chester@gmail.com>
+Date:   Mon May 13 13:03:38 2019 +0000
+
+    Initial update README.md
+
+[33mcommit d7addb41a1b2ed7b8a2ed0a63bf237a6c3686d0b[m
+Author: T Chester <trevin.chester@gmail.com>
+Date:   Mon May 13 12:46:52 2019 +0000
+
+    Initial commit

@@ -1,0 +1,55 @@
+/* This is a comment
+ */
+ 
+ 
+/* THIS IS THE CSS STRUCTURE
+	selector {
+		property-1:		value-1;
+		property-2:		value-2;
+		property-n:		value-n;
+	}
+*/
+ 
+h2 {
+	text-align: right;
+	color: blueviolet
+}
+
+/* using a "." before the selector will select a class attribute */
+.spidey {
+	/* border-style can be set to dotted, dashed, solid, double
+		grove, ridge, inset, outset, none, hidden*/
+	border-style:	solid double groove dotted;
+	border-width:	5px;
+	border-color: chocolate;
+	margin:	100px;
+	padding: 20px;
+}
+
+/* using a "#" before the selector will select an ID attribute */
+#thisIsMyUniqueID {
+	text-align: center
+}
+#myText{
+	position: relative;
+	left: 75px;
+	/* height: 50px;
+	width:  100px; */
+}
+
+
+/* we can almost make more complex selectors */
+
+/* we can select certain elements ONLY if they have a specific parent */
+ul>li {
+	color: red;
+}
+
+
+
+
+
+
+
+
+

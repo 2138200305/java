@@ -1,0 +1,433 @@
+package com.project;
+
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class User {
+
+	static HashMap<String, User> userMap = new HashMap<String, User>();
+
+	public static HashMap<String, User> getUserMap() {
+		return userMap;
+	}
+
+	
+	public static void addToUserMap(User user) {
+		String userName=getUserName(user);
+		userMap.put(userName, user);
+	}
+	
+	// User currentUser = new User("almostApplicant", "registered", "guest");
+	static String clientUserName; // Employees can select User name to modify their account
+	static User currentUser;
+
+	String userName;
+	String userLevel;
+	String password;
+	Boolean accountApproved = false;
+	static Boolean again = true;
+
+	Integer accountNo;
+	int counter = 100; // goal make it increment
+
+	String firstName = "FirstName";
+	String lastName = "lastName";
+
+	Double userBalance = 0.0;
+
+	Integer employeeID;
+
+	static Scanner infoAccept = new Scanner(System.in);
+	String response;
+	static String userSelection = "x";
+
+	public static void main(String[] args) {
+
+		String welcomeUserPassword;
+		String welcomeUserName;
+
+		currentUser = new User("regular", "password", 8080, 4040.0, "customer");
+		userMap.put(currentUser.userName, currentUser);
+		mapToString(currentUser);
+
+		currentUser = new User("adminteller", "admincode", 1111, 800.00, "admin");
+		userMap.put(currentUser.userName, currentUser);
+		mapToString(currentUser);
+
+		currentUser = new User("teller", "code", 1212, 9300.00, "employee");
+		userMap.put(currentUser.userName, currentUser);
+		mapToString(currentUser);
+
+		System.out.println("Main - Enter a username");
+		welcomeUserName = infoAccept.nextLine().trim();
+
+		System.out.println("Main - Please enter a password");
+		welcomeUserPassword = infoAccept.nextLine().trim();
+
+		if (!userMap.containsKey(welcomeUserName))
+			applyForAccount(welcomeUserName, welcomeUserPassword);
+		else {
+			do {
+				if (userMap.containsKey(welcomeUserName)
+						& welcomeUserPassword.matches((userMap.get(welcomeUserName)).password)) {
+					currentUser = userMap.get(welcomeUserName);
+
+					userSelection = getMenu(currentUser.userLevel);
+					if (userSelection.equals("x")) {
+						again = false;
+						System.out.println("Exiting the software");
+					}
+					currentUser.menuOptions(userSelection, currentUser);
+				}
+				
+			} while (again);
+		}
+	}
+
+	@Override
+	public String toString() {
+		return "User [userName=" + userName + ", userLevel=" + userLevel + ", password=" + password
+				+ ", accountApproved=" + accountApproved + ", accountNo=" + accountNo + ", counter=" + counter
+				+ ", firstName=" + firstName + ", lastName=" + lastName + ", accountHolderTwoName=" + ", userBalance="
+				+ userBalance + ", employeeID=" + employeeID;
+	}
+
+	public static void mapToString(User currentUser) {
+		System.out.println("\t mapToString(User currentUser) shows userMap entered " + currentUser.firstName + "\t "
+				+ currentUser.lastName + "userName: " + currentUser.userName + " password: " + currentUser.password
+				+ " " + "you are currently " + currentUser.userLevel + " with account " + currentUser.accountNo
+				+ " contains " + currentUser.userBalance + "\n");
+	}
+
+	public User(String userName, String password, String firstName, String lastName, Integer accountNo,
+			String userLevel) {
+		super();
+		this.userName = userName;
+		this.userLevel = userLevel;
+		this.password = password;
+		this.accountNo = accountNo;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
+	public User(String userName, String password, String userLevel) {
+		this.userName = userName;
+		this.userLevel = userLevel;
+		this.password = password;
+		this.firstName = "FirstName";
+		this.lastName = "lastName";
+		this.accountNo = 000000;
+		this.userBalance = 0.0;
+	}
+
+	public User(String userName, String password, String firstName, String LastName, String userLevel) {
+		this.userName = userName;
+		this.userLevel = userLevel;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = LastName;
+		this.accountNo = 000000;
+		this.userBalance = 0.0;
+	}
+
+//	BANKUSER_ID   NOT NULL NUMBER(15)   
+//	USER_NAME              VARCHAR2(26) 
+//	USER_PASSWORD          VARCHAR2(26) 
+//	FIRST_NAME             VARCHAR2(25) 
+//	LAST_NAME              VARCHAR2(25) 
+//	USER_LEVEL             VARCHAR2(25) 
+
+	public User(String userName, String userLevel, String password, Integer accountNo) {
+		this.userName = userName;
+		this.userLevel = userLevel;
+		this.password = password;
+		this.firstName = "FirstName";
+		this.lastName = "lastName";
+		this.accountNo = accountNo;
+		this.userBalance = 0.0;
+	}
+
+	public User(String userName, String password, Integer accountNo, Double accDouble, String userLevel) {
+		this.userName = userName;
+		this.userLevel = userLevel;
+		this.password = password;
+		this.firstName = "FirstName";
+		this.lastName = "lastName";
+		this.accountNo = accountNo;
+		this.userBalance = 0.0;
+	}
+
+	public User() {
+		this.userName = "EmptyConstructorUserName";
+		this.password = "EmptyConstructorPassword";
+
+		this.firstName = "FirstName";
+		this.lastName = "LastName";
+		this.userLevel = "registered";
+		this.accountNo = 4040;
+		this.userBalance = 100.00;// free $100
+	}
+
+	public static String customerMenu() {
+		String selection = "x";
+		System.out.println("\tYour username and password match a current customers");
+
+		System.out.println("Press:");
+		System.out.println("w - to withdraw");
+		System.out.println("d - to deposit");
+		System.out.println("t - to transfer");
+		System.out.println("x to Exit");
+		selection = infoAccept.nextLine().trim();
+		return selection;
+	}
+
+	public static String employeeMenu() {
+		String selection = "x";
+		System.out.println("Press:");
+		System.out.println("w - to withdraw");
+		System.out.println("d - to deposit");
+		System.out.println("t - to transfer");
+		System.out.println("v - to view all customer information");
+		System.out.println("a - to deny or approve an account");
+		System.out.println("x to Exit");
+		selection = infoAccept.nextLine().trim();
+		return selection;
+	}
+
+	public static String adminMenu() {
+		String selection = "x";
+		System.out.println("Press:");
+		System.out.println("w - to withdraw");
+		System.out.println("d - to deposit");
+		System.out.println("t - to transfer");
+		System.out.println("c - to cancel an account");
+		System.out.println("v - to view all customer information");
+		System.out.println("a - to deny or approve an account");
+		System.out.println("x to Exit");
+		selection = infoAccept.nextLine().trim();
+		return selection;
+	}
+
+	public Double deposit(Double balance, Double transactionAmount) {
+		balance = +transactionAmount;
+		return balance;
+	}
+
+	public Double withdraw(Double balance, Double transactionAmount) {
+		if (balance > transactionAmount)
+			balance -= transactionAmount;
+		else {
+			System.out.println(
+					"withdraw not completed because the transaction amount was greater than that available balance");
+		}
+		return balance;
+	}
+
+	public static void transferToFrom(User fromClient) {
+		User transactionUser = userMap.get(fromClient.userName);
+
+		System.out.println("How much is the transaction?");
+		String amount = infoAccept.nextLine().toLowerCase().trim();
+		Double transaction = Double.parseDouble(amount);
+		System.out.println("\t withdraw amount entered" + transaction);
+
+		transactionUser.userBalance = transactionUser.withdraw(transactionUser.userBalance, transaction);
+		userMap.put(transactionUser.userName, transactionUser);
+		mapToString(userMap.get(transactionUser.userName));
+
+		System.out.println("What user's account would you like to transfer to? Enter userName");
+		String toClientUserID = infoAccept.nextLine().toLowerCase().trim();
+		User toClient = userMap.get(toClientUserID);
+
+		transactionUser = toClient;
+		transactionUser.userBalance = transactionUser.deposit(transactionUser.userBalance, transaction);
+		userMap.put(transactionUser.userName, transactionUser);
+		System.out.println("\t transaction amount entered" + transaction);
+		mapToString(userMap.get(transactionUser.userName));
+	}
+
+	public static User applyForAccount(String logInUserName, String logInPassword) {
+		String selectionApply = "x";
+		User registeredUser = null;
+
+		System.out.println("Type apply to open a bank account");
+		selectionApply = infoAccept.nextLine().trim();
+		System.out.println("Customer typed " + selectionApply + "for selectionApply");
+
+		if (selectionApply.equalsIgnoreCase("apply")) {
+			System.out.println("inside if and creating registered user bc Customer typed " + selectionApply
+					+ "for selectionApply");
+			registeredUser = new User(logInUserName, logInPassword, "registered");
+			mapToString(registeredUser);
+		}
+		return registeredUser.userToCustomer(logInUserName, logInPassword);
+	}
+
+	public User userToCustomer(String logInUserName, String logInPassword) {
+		System.out.println("What is your first name");
+		String firstName = infoAccept.nextLine().trim();
+
+		System.out.println("What is your last name");
+		String lastName = infoAccept.nextLine().trim();
+
+		Integer accountNo = counter++;
+		String userLevel = "customer";
+		User applicantUser = new User(logInUserName, logInPassword, firstName, lastName, accountNo, userLevel);
+		userMap.put(logInUserName, applicantUser);
+		return applicantUser;
+	}
+
+	public static String getUserName(User user) {
+		return userMap.get(user).userName;
+	}
+
+	public static String getPassword(String userName) {
+		return userMap.get(userName).password;
+	}
+
+	public static String getFirstName(String userName) {
+		return userMap.get(userName).firstName;
+	}
+
+	public static String getLastName(String userName) {
+		return userMap.get(userName).lastName;
+	}
+
+	public static String getUserLevel(String userName) {
+		return currentUser.userLevel;
+	}
+
+	public static User getClientAccount(String clientUserName) {
+		System.out.println("What user's account would you like? Enter userName");
+		clientUserName = infoAccept.nextLine().toLowerCase().trim();
+		return userMap.get(clientUserName);
+	}
+
+	public void menuOptions(String userSelection, User currentUser) {
+		String amount;
+		Double transaction;
+		Double transactionBalance = 0.00;
+		User transactionUser;
+
+		switch (userSelection) {
+		case "d":
+			System.out.println("\tDebugging You made it to case d");
+			if (currentUser.userLevel.equals("admin") || currentUser.userLevel.equals("employee")) {
+				transactionUser = getClientAccount(clientUserName);
+			} else {
+				transactionUser = currentUser;
+			}
+			transactionBalance = transactionUser.userBalance;// store client's balance in buffer
+
+			System.out.println("How much is the transaction?");
+			amount = infoAccept.nextLine().toLowerCase().trim();
+			transaction = Double.parseDouble(amount);
+
+			transactionBalance = transactionBalance + transactionUser.deposit(transactionUser.userBalance, transaction);
+			System.out.println("\t transaction amount entered" + transaction);
+
+			mapToString(userMap.get(transactionUser.userName));
+			transactionUser.userBalance = transactionBalance;
+			userMap.put(transactionUser.userName, transactionUser);
+			mapToString(transactionUser);
+			break;
+
+		case "w":
+			System.out.println("\tDebugging You made it to case w");
+			if (currentUser.userLevel.equals("admin") || currentUser.userLevel.equals("employee")) {
+				transactionUser = getClientAccount(clientUserName);
+			} else {
+				transactionUser = currentUser;
+			}
+
+			System.out.println("How much is the transaction?");
+			amount = infoAccept.nextLine().toLowerCase().trim();
+			transaction = Double.parseDouble(amount);
+			transactionUser.userBalance = transactionUser.withdraw(transactionUser.userBalance, transaction);
+			userMap.put(transactionUser.userName, transactionUser);
+			mapToString(transactionUser);
+			break;
+
+		case "t":
+			System.out.println("\tDebugging You made it to case t");
+			User fromClient;
+
+			if (currentUser.userLevel.equals("admin") || currentUser.userLevel.equals("employee")) {
+				fromClient = getClientAccount(clientUserName);
+				mapToString(userMap.get(fromClient.userName));
+			} else {
+				fromClient = currentUser;
+			}
+			transferToFrom(fromClient);
+			break;
+
+		case "c":
+			System.out.println("\tDebugging You made it to case c");
+
+			System.out.println("\t Selected c");
+			if (currentUser.userLevel.equals("admin"))
+
+			{
+				transactionUser = getClientAccount(currentUser.userName);
+			} else {
+				transactionUser = currentUser;
+			}
+			transactionUser = userMap.get(transactionUser.userName);
+			transactionUser.userLevel = "cancelled";
+			transactionUser.accountNo = 0000;
+			transactionUser.userBalance = 000.00;
+			transactionBalance = transactionUser.userBalance;// store
+																// client's
+																// balance
+																// in
+																// buffer
+			userMap.put(transactionUser.userName, transactionUser);
+
+			mapToString(userMap.get(transactionUser.userName));
+			break;
+		case "v":
+			System.out.println("\tDebugging You made it to case v");
+			if (userMap.get(currentUser.userName).userLevel.equals("admin")) {
+				for (String mapUserRecord : userMap.keySet()) {
+					mapToString(userMap.get(mapUserRecord));
+					System.out.println("\n");
+				}
+			} else
+				System.exit(0);
+			break;
+		case "a":
+			// Debugging
+			// TODO
+			System.out.println("\t Selected a");
+			mapToString(currentUser);
+			break;
+		case "x":
+			System.exit(0);
+			System.out.println("DebbugginBreak point inside case x");
+			break;
+
+		default:
+			System.exit(0);
+
+		}
+
+	}
+
+	public static String getMenu(String userLevel) {
+		switch (userLevel) {
+		case "customer":
+			userSelection = customerMenu();
+
+			break;
+		case "employee":
+
+			userSelection = employeeMenu();
+			break;
+		case "admin":
+			userSelection = adminMenu();
+			break;
+		default:
+		}
+		return userSelection;
+	}
+}

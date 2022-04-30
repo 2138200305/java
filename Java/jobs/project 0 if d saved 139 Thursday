@@ -1,0 +1,46 @@
+		if (userSelection.equals("d")) {
+			String amount;
+			Double transaction;
+			Double transactionBalance;
+
+			System.out.println("\tcustomer Menu selection is " + userSelection);
+			if (userMap.get(currentUser.userName).userLevel.equals("admin")
+					|| userMap.get(currentUser.userName).userLevel.equals("employee")) {
+				mapToString(currentUser);
+				System.out.println("What user's account would you like? Enter userName");
+				clientUserName = infoAccept.nextLine().toLowerCase().trim();
+				// DEBUGGING
+				System.out.println("\t" + clientUserName + " clientUserName entered but not entering usermap ");
+
+				transactionUser = userMap.get(clientUserName);
+				transactionBalance = transactionUser.userBalance;// store client's balance in buffer
+
+				System.out.println("How much is the transaction?");
+				amount = infoAccept.nextLine().toLowerCase().trim();
+				transaction = Double.parseDouble(amount);
+				// Debugging
+				transactionBalance = transactionBalance
+						+ currentUser.deposit(userMap.get(clientUserName).userBalance, transaction);
+				System.out.println("\t transaction amount entered" + transaction);
+				mapToString(userMap.get(transactionUser.userName));
+				transactionUser.userBalance = transactionBalance;
+				userMap.put(clientUserName, transactionUser);
+				mapToString(userMap.get(clientUserName));
+			}
+			if (userMap.get(currentUser.userName).userLevel == "customer") {
+				mapToString(userMap.get(currentUser.userName));
+				transactionUser = userMap.get(currentUser.userName);
+				System.out.println("How much is the transaction?");
+				amount = infoAccept.nextLine().toLowerCase().trim();
+				transaction = Double.parseDouble(amount);
+				transactionBalance = +currentUser.deposit(userMap.get(currentUser.userName).userBalance, transaction);
+				System.out
+						.println("\t transaction amount entered" + transaction + userMap.get(transactionUser.userName));
+				transactionUser.userBalance = transactionBalance;
+				userMap.put(clientUserName, transactionUser);
+				mapToString(userMap.get(clientUserName));
+
+			} else if (userSelection == "w") {
+			System.out.println("\tW selected");
+			}
+	}

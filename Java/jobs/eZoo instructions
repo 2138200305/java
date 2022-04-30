@@ -1,0 +1,15 @@
+Instructions
+Before you can get started working with the eZoo project, it's key that you understand what is being asked of you and how the existing starter kit is structured.
+
+eZoo is a web-based zoo management platform for zoo employees and customers. It is designed to keep track of daily activities within a zoo, and to serve as a central location for data that needs to be stored and shared. Employees will be able to keep track of all of the animals that come in and out of the zoo using the Animal Care System within the eZoo application.
+
+In the next dive, you will download a starter kit. The starter kit is a functional application that you will be able to start and run immediately. The existing functionality is for the Animal Care System, which handles the addition of new animals to the zoo.
+
+Your task for this level 100 eZoo project will be to add functionality to the existing program to support the creation of various feeding schedules. A "feeding schedule" will be a simple record that tracks an animal's dietary needs, a regular feeding time, and any medications that may be required. An individual feeding schedule might be assigned to multiple animals, but each animal will only have one feeding schedule. You will implement this functionality in parts, doing a little bit at the end of each dive. The specific functions you will be adding will allow users to...
+
+Create a new feeding schedule
+Update the information for an existing feeding schedule
+Assign a feeding schedule to an animal
+Delete an existing feeding schedule
+See which feeding schedule has been assigned to a given animal
+The eZoo application saves all animal information to a database, and your feeding schedule functionality will have to store dietary information there too. In the next dive you'll learn all about databases and SQL, set up the eZoo starter kit, and create your database tables.
