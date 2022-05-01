@@ -7,7 +7,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import dao.DateValidationException;
 import dao.FlooringMasteryEmptyInputException;
 import dao.StateNotServicedException;
-import service.FlooringMasteryPersistenceException;
+import dao.FlooringMasteryPersistenceException;
 import service.FlooringMasteryServiceLayer;
 import ui.FlooringMasteryView;
 
@@ -24,7 +24,7 @@ public class FlooringMasteryController {
 
     public void run() throws FlooringMasteryPersistenceException, StateNotServicedException, DateValidationException,
             FlooringMasteryEmptyInputException {
-
+        Boolean keepGoing =true;
         int menuSelection = 0;
         try {
             while (keepGoing) {

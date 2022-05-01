@@ -1,5 +1,5 @@
 package dao;
 
-public class FlooringMasteryEmptyInputException  {
+public class FlooringMasteryEmptyInputException extends Exception {
 
 }
