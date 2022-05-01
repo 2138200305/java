@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="856a39a2-00cf-472e-aa21-76e72896f434" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/src/main/java/com/jn/vendingmachine/App.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/src/main/java/com/jn/vendingmachine/auditFile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/src/main/java/com/jn/vendingmachine/controller/VendingMachineController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/src/main/java/com/jn/vendingmachine/dao/VendingMachineAuditDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/src/main/java/com/jn/vendingmachine/dao/VendingMachineAuditDaoFileImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/src/main/java/com/jn/vendingmachine/dao/VendingMachineDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/src/main/java/com/jn/vendingmachine/dao/VendingMachineDaoFileImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/src/main/java/com/jn/vendingmachine/dao/VendingMachinePersistenceException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/src/main/java/com/jn/vendingmachine/dto/VendingMachineItem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/src/main/java/com/jn/vendingmachine/itemList" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/src/main/java/com/jn/vendingmachine/service/Coins.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/src/main/java/com/jn/vendingmachine/service/InsufficientFundsException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/src/main/java/com/jn/vendingmachine/service/NoItemInventoryException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/src/main/java/com/jn/vendingmachine/service/VendingMachineServiceLayer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/src/main/java/com/jn/vendingmachine/service/VendingMachineServiceLayerImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/src/main/java/com/jn/vendingmachine/ui/UserIO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/src/main/java/com/jn/vendingmachine/ui/UserIOConsoleImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/src/main/java/com/jn/vendingmachine/ui/VendingMachineView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/src/main/resources/applicationContext.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/target/classes/jn/App.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/target/classes/jn/controller/VendingMachineController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/target/classes/jn/dao/VendingMachineAuditDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/target/classes/jn/dao/VendingMachineAuditDaoFileImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/target/classes/jn/dao/VendingMachineDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/target/classes/jn/dao/VendingMachineDaoFileImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/target/classes/jn/dao/VendingMachinePersistenceException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/target/classes/jn/dto/VendingMachineItem.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/target/classes/jn/service/Coins$coins.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/target/classes/jn/service/Coins.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/target/classes/jn/service/InsufficientFundsException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/target/classes/jn/service/NoItemInventoryException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/target/classes/jn/service/VendingMachineServiceLayer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/target/classes/jn/service/VendingMachineServiceLayerImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/target/classes/jn/ui/UserIO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/target/classes/jn/ui/UserIOConsoleImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/OpenFolderNewFold/target/classes/jn/ui/VendingMachineView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Screen Shot 2022-04-14 at 1.02.09 PM.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/.idea/compiler.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/.idea/jarRepositories.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/.idea/libraries/Maven__org_springframework_spring_aop_5_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/.idea/libraries/Maven__org_springframework_spring_beans_5_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/.idea/libraries/Maven__org_springframework_spring_context_5_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/.idea/libraries/Maven__org_springframework_spring_core_5_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/.idea/libraries/Maven__org_springframework_spring_expression_5_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/.idea/libraries/Maven__org_springframework_spring_jcl_5_2_2_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/VendingMachine.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/out/production/VendingMachine/App.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/out/production/VendingMachine/controller/VendingMachineController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/out/production/VendingMachine/ui/VendingMachineView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/src/App.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/src/auditFile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/src/controller/VendingMachineController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/src/dao/VendingMachineAuditDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/src/dao/VendingMachineAuditDaoFileImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/src/dao/VendingMachineDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/src/dao/VendingMachineDaoFileImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/src/dao/VendingMachinePersistenceException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/src/dto/VendingMachineItem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/src/itemList" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/src/service/Coins.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/src/service/InsufficientFundsException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/src/service/NoItemInventoryException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/src/service/VendingMachineServiceLayer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/src/service/VendingMachineServiceLayerImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/src/ui/UserIO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/src/ui/UserIOConsoleImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/src/ui/VendingMachineView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/target/classes/App.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/target/classes/auditFile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/target/classes/controller/VendingMachineController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/target/classes/dao/VendingMachineAuditDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/target/classes/dao/VendingMachineAuditDaoFileImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/target/classes/dao/VendingMachineDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/target/classes/dao/VendingMachineDaoFileImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/target/classes/dao/VendingMachinePersistenceException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/target/classes/dto/VendingMachineItem.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/target/classes/itemList" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/target/classes/service/Coins$coins.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/target/classes/service/Coins.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/target/classes/service/InsufficientFundsException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/target/classes/service/NoItemInventoryException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/target/classes/service/VendingMachineServiceLayer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/target/classes/service/VendingMachineServiceLayerImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/target/classes/ui/UserIO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/target/classes/ui/UserIOConsoleImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/SpringVendingMachine/target/classes/ui/VendingMachineView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VendingMachine/VendingMachine.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VendingMachineSpring/src/main/java/com/jn/App.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VendingMachineSpring/src/main/java/com/jn/auditFile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VendingMachineSpring/src/main/java/com/jn/controller/VendingMachineController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VendingMachineSpring/src/main/java/com/jn/dao/VendingMachineAuditDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VendingMachineSpring/src/main/java/com/jn/dao/VendingMachineAuditDaoFileImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VendingMachineSpring/src/main/java/com/jn/dao/VendingMachineDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VendingMachineSpring/src/main/java/com/jn/dao/VendingMachineDaoFileImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VendingMachineSpring/src/main/java/com/jn/dao/VendingMachinePersistenceException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VendingMachineSpring/src/main/java/com/jn/dto/VendingMachineItem.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VendingMachineSpring/src/main/java/com/jn/itemList" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VendingMachineSpring/src/main/java/com/jn/service/Coins.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VendingMachineSpring/src/main/java/com/jn/service/InsufficientFundsException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VendingMachineSpring/src/main/java/com/jn/service/NoItemInventoryException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VendingMachineSpring/src/main/java/com/jn/service/VendingMachineServiceLayer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VendingMachineSpring/src/main/java/com/jn/service/VendingMachineServiceLayerImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VendingMachineSpring/src/main/java/com/jn/ui/UserIO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VendingMachineSpring/src/main/java/com/jn/ui/UserIOConsoleImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/VendingMachineSpring/src/main/java/com/jn/ui/VendingMachineView.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="28OQLFsUgmYp130fIDGB3eZDvR4" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.general" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="856a39a2-00cf-472e-aa21-76e72896f434" name="Changes" comment="" />
+      <created>1651085094594</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1651085094594</updated>
+    </task>
+    <servers />
+  </component>
+</project>
