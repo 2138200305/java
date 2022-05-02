@@ -32,4 +32,9 @@ public class FlooringMasteryView {
         io.print("Unknown Comand!");
     }
 
+    public void displayErrorMessage(String message) {
+        io.print("There error an error occurred: " + message);
+        io.print(message);
+    }
+
 }

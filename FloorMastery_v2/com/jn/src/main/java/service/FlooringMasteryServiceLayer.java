@@ -5,11 +5,16 @@ import java.util.List;
 
 import dao.DateValidationException;
 import dao.FlooringMasteryEmptyInputException;
+import dao.FlooringMasteryPersistenceException;
+import dao.StateNotServicedException;
 import dto.Order;
 
 public interface FlooringMasteryServiceLayer {
 
     public List<Order> getAllOrders() throws FlooringMasteryPersistenceException;
-    public BigDecimal placeOrder(String name, BigDecimal inputCash) throws FlooringMasteryPersistenceException, StateNotServicedException, DateValidationException, FlooringMasteryEmptyInputException;
+
+    public BigDecimal placeOrder(String name, BigDecimal inputCash) throws FlooringMasteryPersistenceException,
+            StateNotServicedException, DateValidationException, FlooringMasteryEmptyInputException;
+
     public int[] giveChange(BigDecimal outputCash);
 }

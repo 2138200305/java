@@ -11,6 +11,12 @@ import dao.FlooringMasteryPersistenceException;
 import service.FlooringMasteryServiceLayer;
 import ui.FlooringMasteryView;
 
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
+
+
 @Component
 public class FlooringMasteryController {
     private FlooringMasteryView view;
@@ -22,8 +28,8 @@ public class FlooringMasteryController {
         this.service = service;
     }
 
-    public void run() throws FlooringMasteryPersistenceException, StateNotServicedException, DateValidationException,
-            FlooringMasteryEmptyInputException {
+    public void run() throws FlooringMasteryPersistenceException, StateNotServicedException, DateValidationException, FlooringMasteryEmptyInputException
+    {
         Boolean keepGoing =true;
         int menuSelection = 0;
         try {
@@ -57,12 +63,17 @@ public class FlooringMasteryController {
                     default:
                         unknownCmd();
                 }
-
             }
-        } catch (FlooringMasteryPersistenceException | StateNotServicedException | DateValidationException
-                | FlooringMasteryEmptyInputException e) {
+            exitMsg();
+        } catch (DateValidationException | FlooringMasteryEmptyInputException | FlooringMasteryPersistenceException
+                | StateNotServicedException e)
+        {
             view.displayErrorMessage(e.getMessage());
         }
+    }
+
+    private void exitMsg() {
+        view.displayMenuBanner();
     }
 
     private int getMenuSelection() {
@@ -73,7 +84,7 @@ public class FlooringMasteryController {
         view.unknownCmd();
     }
 
-    public void notCompleted() {
+    public void notCompleted() throws DateValidationException, FlooringMasteryEmptyInputException, FlooringMasteryPersistenceException, StateNotServicedException {
         System.out.println("Not completed");
     }
 
